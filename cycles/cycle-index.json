@@ -3,10 +3,10 @@
   "tagline": "A drop changes the whole pour. Surface-aware design substrate for AI-mediated theming.",
   "updated": "2026-04-30",
   "summary": {
-    "current_phase": 4,
+    "current_phase": 5,
     "active_cycles": [],
     "open_audits": [],
-    "next": "v0.2 scope: typography + spacing + radius + shadow + motion tokens; brand-lock primitives; mood deltas across all surfaces; visual verification on every cycle. See cycles/v02-scope.md.",
+    "next": "Cycle 21 \u2014 define axis types + registry shape (multi-axis tokens). v0.2 reframes registry from light/dark pair to value matrix indexed by orthogonal axes (surface, flavor, tone, elevation, mood, brand-lock). See cycles/v02-scope.md.",
     "honest_count": {
       "real_and_verified": 11,
       "real_with_bug_shipped": 1,
@@ -23,7 +23,14 @@
       "cycle 20 npm publish was preparation only \u2014 not published",
       "mood deltas are color-only (4 token kinds: bg/ink/accent/border) \u2014 cannot express Performance/Transformation moods"
     ],
-    "audit_report": "../arzadon-fitness/.soma/reports/tincture-cycle-audit-2026-04-30.md"
+    "audit_report": "../arzadon-fitness/.soma/reports/tincture-cycle-audit-2026-04-30.md",
+    "publishable": "@tincture/core (this repo). v0.1.x current; v0.2.0 target after cycle 36.",
+    "live_consumer": "arzadon-fitness/studio (Gravicity/studio repo) \u2014 first user. Live testing happens here while the substrate evolves.",
+    "scope_split": {
+      "tool_lives_at": "~/Gravicity/personal/tincture-css",
+      "consumer_lives_at": "~/Gravicity/clients/arzadon-fitness/studio",
+      "rule": "Project plans + cycle docs live ONLY in personal/tincture-css. Arzadon imports the tool and contains only consumer-side config + the local copy of foundation files for the live build."
+    }
   },
   "phases": [
     {
@@ -72,6 +79,29 @@
         18,
         19,
         20
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Multi-axis substrate (v0.2)",
+      "status": "queued",
+      "cycles": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
       ]
     }
   ],
@@ -273,6 +303,118 @@
       "shipped": "2026-04-30",
       "commit": "d60d1b3",
       "verification": "misnamed-ready"
+    },
+    {
+      "id": "cycle-21",
+      "phase": 5,
+      "title": "Define axis types + registry shape (TypeScript types)",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-22",
+      "phase": 5,
+      "title": "Update codegen to emit multi-axis CSS from new registry",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-23",
+      "phase": 5,
+      "title": "Migrate v0.1 registry to axis-aware shape (lossless)",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-24",
+      "phase": 5,
+      "title": "Add typography axis (surface, sometimes mood)",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-25",
+      "phase": 5,
+      "title": "Add spacing axis (tone-aware)",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-26",
+      "phase": 5,
+      "title": "Add radius + shadow tokens",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-27",
+      "phase": 5,
+      "title": "Add motion tokens + transition shorthand",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-28",
+      "phase": 5,
+      "title": "Brand-lock primitives (immutable)",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-29",
+      "phase": 5,
+      "title": "Mood: performance (full axis delta)",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-30",
+      "phase": 5,
+      "title": "Mood: transformation (full axis delta)",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-31",
+      "phase": 5,
+      "title": "Mood: clinical v2 (surface-aware, multi-axis)",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-32",
+      "phase": 5,
+      "title": "Mood: editorial-warm v2",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-33",
+      "phase": 5,
+      "title": "Visual-verification protocol \u2014 mandatory mosaic capture",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-34",
+      "phase": 5,
+      "title": "Migration sweep \u2014 finish what cycle 7 started",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-35",
+      "phase": 5,
+      "title": "Studio designer \u2014 typography + spacing + axis pickers",
+      "status": "queued",
+      "verification": "not-started"
+    },
+    {
+      "id": "cycle-36",
+      "phase": 5,
+      "title": "npm publish \u2014 @tincture/core@0.2.0 (real publish)",
+      "status": "queued",
+      "verification": "not-started"
     }
   ]
 }

@@ -1,5 +1,35 @@
 # Tincture
 
+> A drop changes the whole pour.
+
+A surface-aware design substrate for AI-mediated theming. Built for AI agents and humans who want to compose entire visual identities from coordinated multi-axis token deltas, not hand-curated palette swaps.
+
+**Status:** v0.1.1 (manual override pattern, color-only). v0.2 in scope (multi-axis registry — see `cycles/v02-scope.md`).
+
+## Project layout
+
+| Path | What |
+|---|---|
+| `src/` | The publishable substrate (foundation + registry + scripts + moods) |
+| `cycles/` | Cycle docs, audits, v0.2 scope. Each cycle = one verifiable shipped outcome |
+| `consumers/` | How real projects integrate Tincture (e.g. `arzadon-fitness.md`) |
+| `docs/` | Quickstart, architecture, mood authoring |
+| `tools/vscode-tincture/` | VSCode extension stub |
+| `package.json` | `@tincture/core` (target v0.2.0; v0.1.x in flight) |
+
+## Where the tool ends and the consumer begins
+
+- **Tincture lives here** (`~/Gravicity/personal/tincture-css/`). Source code, project plans, cycle docs, npm package definition.
+- **Arzadon is consumer #1** (`~/Gravicity/clients/arzadon-fitness/studio/`). Live testing ground; runs Tincture in production. Has a local copy of the substrate but does NOT own the tool's plans or history.
+- **Other consumers welcome.** The substrate is publishable; v0.2 lands as `npm install @tincture/core` (cycle 36).
+
+See `consumers/arzadon-fitness.md` for the consumer-integration pattern.
+
+---
+
+## Original notes
+
+
 > **A drop changes the whole pour.** Surface-aware design substrate for AI-mediated theming.
 
 A 4-layer CSS architecture that combines `light-dark()` for surface-aware ink + a typed token registry for AI-mediated changes + mood presets for one-command vibes. Orphan-text-on-saturated-bg bugs are structurally impossible. One command (`tincture mood <name>`) coordinates a full visual shift. Designer studio tree IS the registry tree.
