@@ -1,0 +1,152 @@
+{
+  "version": "0.2.0-alpha",
+  "name": "tincture/v0.2-example",
+  "doc": "Example registry exercising the multi-axis schema. Used by tests/test-schema.mjs as the reference good registry. Mirrors the cycles/v02-scope.md examples.",
+  "tokens": {
+    "ink": {
+      "kind": "color",
+      "axes": ["surface", "flavor"],
+      "doc": "Primary text color. Surface-aware luminance, flavor-aware hue.",
+      "values": {
+        "default": "#1A1612",
+        "surface=dark": "#FFFFFF",
+        "flavor=warm,surface=dark": "#FAF7F2",
+        "flavor=ember,surface=dark": "#FAFAF8"
+      }
+    },
+    "ink-soft": {
+      "kind": "color",
+      "axes": ["surface"],
+      "doc": "Secondary text. Body copy, captions.",
+      "values": {
+        "default": "#4A4540",
+        "surface=dark": "#B8B8C4"
+      }
+    },
+    "bg": {
+      "kind": "color",
+      "axes": ["surface", "flavor"],
+      "doc": "Page background. Surface + flavor aware.",
+      "values": {
+        "default": "#F7F4F0",
+        "surface=dark": "#12151C",
+        "flavor=warm,surface=dark": "#1A1612",
+        "flavor=ember,surface=dark": "#1F1A14"
+      }
+    },
+    "accent": {
+      "kind": "color",
+      "axes": ["surface", "flavor"],
+      "doc": "Primary accent. Saturated red on dark, deep crimson on light.",
+      "values": {
+        "default": "#C41E3A",
+        "surface=dark": "#E82E11"
+      }
+    },
+    "accent-fg": {
+      "kind": "color",
+      "axes": [],
+      "doc": "Ink color on accent backgrounds. Surface-invariant white.",
+      "values": {
+        "default": "#FFFFFF"
+      }
+    },
+    "weight-display": {
+      "kind": "typography",
+      "axes": ["surface"],
+      "doc": "Display headline weight. Heavier on dark surfaces for legibility.",
+      "values": {
+        "default": "700",
+        "surface=dark": "800"
+      }
+    },
+    "weight-body": {
+      "kind": "typography",
+      "axes": [],
+      "doc": "Body copy weight.",
+      "values": {
+        "default": "400"
+      }
+    },
+    "leading-tight": {
+      "kind": "typography",
+      "axes": [],
+      "values": {
+        "default": "1.1"
+      }
+    },
+    "track-display": {
+      "kind": "typography",
+      "axes": [],
+      "values": {
+        "default": "-0.02em"
+      }
+    },
+    "space-section": {
+      "kind": "spacing",
+      "axes": ["tone"],
+      "doc": "Vertical padding on sections. Feature sections breathe more; brand-bands are tight.",
+      "values": {
+        "default": "5rem",
+        "tone=feature": "8rem",
+        "tone=brand-band": "4rem"
+      }
+    },
+    "space-rhythm": {
+      "kind": "spacing",
+      "axes": [],
+      "values": {
+        "default": "1.5rem"
+      }
+    },
+    "radius-soft": {
+      "kind": "radius",
+      "axes": [],
+      "values": {
+        "default": "12px"
+      }
+    },
+    "radius-pill": {
+      "kind": "radius",
+      "axes": [],
+      "values": {
+        "default": "9999px"
+      }
+    },
+    "shadow-lifted": {
+      "kind": "shadow",
+      "axes": ["surface", "elevation"],
+      "doc": "Card / elevated surface shadow. Heavier on dark, even more dramatic at elevation=dramatic.",
+      "values": {
+        "default": "0 8px 24px rgba(0,0,0,0.08)",
+        "surface=dark": "0 8px 24px rgba(0,0,0,0.4)",
+        "elevation=dramatic": "0 24px 64px rgba(0,0,0,0.16)",
+        "elevation=dramatic,surface=dark": "0 24px 64px rgba(0,0,0,0.6)"
+      }
+    },
+    "motion-snap": {
+      "kind": "motion",
+      "axes": [],
+      "values": {
+        "default": "150ms cubic-bezier(0.4, 0, 0.2, 1)"
+      }
+    },
+    "brand-mark-primary": {
+      "kind": "brand-lock",
+      "axes": [],
+      "locked": true,
+      "doc": "Arzadon wordmark red. Immutable — moods cannot override.",
+      "values": {
+        "default": "#EF4123"
+      }
+    },
+    "brand-mark-secondary": {
+      "kind": "brand-lock",
+      "axes": [],
+      "locked": true,
+      "values": {
+        "default": "#B82339"
+      }
+    }
+  }
+}

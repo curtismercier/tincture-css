@@ -4,9 +4,11 @@
   "updated": "2026-04-30",
   "summary": {
     "current_phase": 5,
-    "active_cycles": [],
+    "active_cycles": [
+      "cycle-22"
+    ],
     "open_audits": [],
-    "next": "Cycle 21 \u2014 define axis types + registry shape (multi-axis tokens). v0.2 reframes registry from light/dark pair to value matrix indexed by orthogonal axes (surface, flavor, tone, elevation, mood, brand-lock). See cycles/v02-scope.md.",
+    "next": "Cycle 22 \u2014 multi-axis codegen. Read v0.2 registry via validateRegistry; emit cascade rules per axis-cell with compound attribute selectors. NO light-dark(). Idempotent. Spec in cycles/phase-5/cycle-21.md handoff section.",
     "honest_count": {
       "real_and_verified": 11,
       "real_with_bug_shipped": 1,
@@ -308,8 +310,15 @@
       "id": "cycle-21",
       "phase": 5,
       "title": "Define axis types + registry shape (TypeScript types)",
-      "status": "queued",
-      "verification": "not-started"
+      "status": "done",
+      "verification": "39/39 schema tests pass",
+      "shipped": "2026-04-30",
+      "files": [
+        "src/types.ts",
+        "src/schema.mjs",
+        "src/registry.v02-example.json",
+        "tests/test-schema.mjs"
+      ]
     },
     {
       "id": "cycle-22",
