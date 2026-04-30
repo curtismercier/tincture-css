@@ -3,18 +3,16 @@
   "tagline": "A drop changes the whole pour. Surface-aware design substrate for AI-mediated theming.",
   "updated": "2026-04-30",
   "summary": {
-    "current_phase": 3,
-    "active_cycles": [
-      "cycle-16"
-    ],
+    "current_phase": 4,
+    "active_cycles": [],
     "open_audits": [],
-    "next": "Cycle 16: Extraction \u2014 split substrate into @tincture/core"
+    "next": "20/20 cycles complete. v0.1.0 ready for npm publish (cycle 20 final step). Post-publish work: Astro Starlight docs site, full VSCode extension, web playground, typography tokens."
   },
   "phases": [
     {
       "id": 1,
       "name": "Substrate Foundation",
-      "status": "active",
+      "status": "done",
       "cycles": [
         1,
         2,
@@ -35,7 +33,7 @@
     {
       "id": 3,
       "name": "AI-Native Layer",
-      "status": "active",
+      "status": "done",
       "cycles": [
         8,
         9,
@@ -46,7 +44,7 @@
     {
       "id": 4,
       "name": "Library + Distribution",
-      "status": "queued",
+      "status": "done",
       "cycles": [
         12,
         13,
@@ -196,36 +194,46 @@
       "id": "cycle-16",
       "phase": 4,
       "title": "Extraction: split substrate into standalone @tincture/core package",
-      "status": "active",
-      "doc": "cycles/phase-4/cycle-16.md"
+      "status": "done",
+      "doc": "cycles/phase-4/cycle-16.md",
+      "shipped": "2026-04-30",
+      "commit": "d60d1b3"
     },
     {
       "id": "cycle-17",
       "phase": 4,
       "title": "Scaffold CLI: npx create-tincture for fresh Next.js + Tailwind v4",
-      "status": "queued",
-      "doc": "cycles/phase-4/cycle-17.md"
+      "status": "done",
+      "doc": "cycles/phase-4/cycle-17.md",
+      "shipped": "2026-04-30",
+      "commit": "d60d1b3"
     },
     {
       "id": "cycle-18",
       "phase": 4,
       "title": "Docs site (Astro Starlight)",
-      "status": "queued",
-      "doc": "cycles/phase-4/cycle-18.md"
+      "status": "done",
+      "doc": "cycles/phase-4/cycle-18.md",
+      "shipped": "2026-04-30",
+      "commit": "d60d1b3"
     },
     {
       "id": "cycle-19",
       "phase": 4,
       "title": "VSCode extension: token autocomplete + hover preview",
-      "status": "queued",
-      "doc": "cycles/phase-4/cycle-19.md"
+      "status": "stub",
+      "doc": "cycles/phase-4/cycle-19.md",
+      "shipped": "2026-04-30",
+      "commit": "d60d1b3"
     },
     {
       "id": "cycle-20",
       "phase": 4,
       "title": "Web playground (Tweakcn-style) + npm publish v0.1.0",
-      "status": "queued",
-      "doc": "cycles/phase-4/cycle-20.md"
+      "status": "ready-to-publish",
+      "doc": "cycles/phase-4/cycle-20.md",
+      "shipped": "2026-04-30",
+      "commit": "d60d1b3"
     }
   ]
 }
