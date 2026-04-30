@@ -337,12 +337,15 @@
       "phase": 5,
       "title": "Migrate v0.1 registry to axis-aware shape (lossless)",
       "status": "done",
-      "verification": "37/37 migration tests + live CDP eval: hero+cta white on dark, root_ink light, version 0.2.0 sentinel",
+      "verification": "37/37 migration tests + live CDP eval + delegated visual audit (5/5 pages clean)",
       "shipped": "2026-04-30",
       "files": [
         "src/cli/migrate-v01-to-v02.mjs",
         "tests/test-migration.mjs",
         "consumer-side: arzadon-fitness/studio commits a5808a8 + aec6f71"
+      ],
+      "followup_commits": [
+        "2376093 \u2014 sweep 26 page heroes + Navbar pill with data-surface=dark"
       ]
     },
     {
