@@ -1,0 +1,231 @@
+{
+  "project": "tincture-css",
+  "tagline": "A drop changes the whole pour. Surface-aware design substrate for AI-mediated theming.",
+  "updated": "2026-04-30",
+  "summary": {
+    "current_phase": 3,
+    "active_cycles": [
+      "cycle-16"
+    ],
+    "open_audits": [],
+    "next": "Cycle 16: Extraction \u2014 split substrate into @tincture/core"
+  },
+  "phases": [
+    {
+      "id": 1,
+      "name": "Substrate Foundation",
+      "status": "active",
+      "cycles": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Registry + Codegen",
+      "status": "done",
+      "cycles": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "id": 3,
+      "name": "AI-Native Layer",
+      "status": "active",
+      "cycles": [
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Library + Distribution",
+      "status": "queued",
+      "cycles": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  ],
+  "cycles": [
+    {
+      "id": "cycle-1",
+      "phase": 1,
+      "title": "Foundation: light-dark() + data-surface",
+      "status": "done",
+      "doc": "cycles/phase-1/cycle-1.md",
+      "commit": "25dd915",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-2",
+      "phase": 1,
+      "title": "Surface untangle: theme = surface x flavor",
+      "status": "active",
+      "doc": "cycles/phase-1/cycle-2.md"
+    },
+    {
+      "id": "cycle-3",
+      "phase": 1,
+      "title": "Component migration wave 1: Hero + Pricing + ReviewSpotlight",
+      "status": "done",
+      "doc": "cycles/phase-1/cycle-3.md",
+      "commit": "0cd7dfd",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-4",
+      "phase": 2,
+      "title": "Registry: tokens/registry.json + schema",
+      "status": "done",
+      "doc": "cycles/phase-2/cycle-4.md",
+      "commit": "89f577f",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-5",
+      "phase": 2,
+      "title": "Codegen: registry \u2192 CSS + TS + manifest",
+      "status": "done",
+      "doc": "cycles/phase-2/cycle-5.md",
+      "commit": "2aa2d49",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-6",
+      "phase": 2,
+      "title": "Studio reads manifest (kill stale TOKEN_GROUPS)",
+      "status": "active",
+      "doc": "cycles/phase-2/cycle-6.md"
+    },
+    {
+      "id": "cycle-7",
+      "phase": 2,
+      "title": "Component migration wave 2: tokenize remaining 12+ components",
+      "status": "done",
+      "doc": "cycles/phase-2/cycle-7.md",
+      "commit": "79e8b39",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-8",
+      "phase": 3,
+      "title": "MCP server: tokens.* + mood.* tools",
+      "status": "done",
+      "doc": "cycles/phase-3/cycle-8.md",
+      "commit": "810e549",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-9",
+      "phase": 3,
+      "title": "Multi-state preview (headless capture grid)",
+      "status": "done",
+      "doc": "cycles/phase-3/cycle-9.md",
+      "commit": "93b2f43",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-10",
+      "phase": 3,
+      "title": "Contrast guard in pre-push CI",
+      "status": "done",
+      "doc": "cycles/phase-3/cycle-10.md",
+      "commit": "b63c962",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-11",
+      "phase": 3,
+      "title": "Token reverse-lookup (tokens.impact)",
+      "status": "done",
+      "doc": "cycles/phase-3/cycle-11.md",
+      "commit": "62aafca",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-12",
+      "phase": 4,
+      "title": "Mood preset: arzadon-default (baseline)",
+      "status": "done",
+      "doc": "cycles/phase-4/cycle-12.md",
+      "commit": "45ed0bd",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-13",
+      "phase": 4,
+      "title": "Mood preset: clinical (cooler, tighter, sharper)",
+      "status": "done",
+      "doc": "cycles/phase-4/cycle-13.md",
+      "commit": "45ed0bd",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-14",
+      "phase": 4,
+      "title": "Mood preset: editorial-warm (serif, parchment, soft)",
+      "status": "done",
+      "doc": "cycles/phase-4/cycle-14.md",
+      "commit": "45ed0bd",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-15",
+      "phase": 4,
+      "title": "Mood preset: aggressive-bold + minimalist-quiet + luxurious-refined",
+      "status": "done",
+      "doc": "cycles/phase-4/cycle-15.md",
+      "commit": "45ed0bd",
+      "shipped": "2026-04-30"
+    },
+    {
+      "id": "cycle-16",
+      "phase": 4,
+      "title": "Extraction: split substrate into standalone @tincture/core package",
+      "status": "active",
+      "doc": "cycles/phase-4/cycle-16.md"
+    },
+    {
+      "id": "cycle-17",
+      "phase": 4,
+      "title": "Scaffold CLI: npx create-tincture for fresh Next.js + Tailwind v4",
+      "status": "queued",
+      "doc": "cycles/phase-4/cycle-17.md"
+    },
+    {
+      "id": "cycle-18",
+      "phase": 4,
+      "title": "Docs site (Astro Starlight)",
+      "status": "queued",
+      "doc": "cycles/phase-4/cycle-18.md"
+    },
+    {
+      "id": "cycle-19",
+      "phase": 4,
+      "title": "VSCode extension: token autocomplete + hover preview",
+      "status": "queued",
+      "doc": "cycles/phase-4/cycle-19.md"
+    },
+    {
+      "id": "cycle-20",
+      "phase": 4,
+      "title": "Web playground (Tweakcn-style) + npm publish v0.1.0",
+      "status": "queued",
+      "doc": "cycles/phase-4/cycle-20.md"
+    }
+  ]
+}

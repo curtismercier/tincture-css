@@ -1,0 +1,16 @@
+{
+  "name": "vscode-tincture",
+  "displayName": "Tincture",
+  "description": "Token autocomplete + hover preview for Tincture design substrate",
+  "version": "0.0.1",
+  "engines": { "vscode": "^1.74.0" },
+  "categories": ["Other"],
+  "main": "./extension.js",
+  "activationEvents": ["onLanguage:typescriptreact", "onLanguage:css", "onLanguage:tailwindcss"],
+  "contributes": {
+    "commands": [
+      { "command": "tincture.applyMood", "title": "Tincture: Apply Mood" },
+      { "command": "tincture.previewToken", "title": "Tincture: Preview Token" }
+    ]
+  }
+}

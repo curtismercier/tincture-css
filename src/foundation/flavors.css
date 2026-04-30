@@ -1,0 +1,56 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   tincture/flavors.css — Phase 1, cycle 2.
+
+   Flavor is the SECOND axis (orthogonal to surface). Surface decides
+   light-vs-dark luminance. Flavor decides tonal personality within
+   that luminance:
+
+     cool    — slightly cooler parchment / slate, the default
+     warm    — warmer parchment / charcoal (current "grey" feel)
+     ember   — warm-charcoal palette, only meaningful on dark surface
+
+   Flavors only override a SUBSET of foundation tokens — typically the
+   surface backgrounds and a few accent tints. Most of the work
+   (--ink / --bg / --accent / etc.) is already done by foundation.css's
+   light-dark() pairs.
+
+   Authored cycle 2 (s01-91da41).
+   See cycles/phase-1/cycle-2.md.
+   ───────────────────────────────────────────────────────────────────── */
+
+/* Cool flavor (default) — keep foundation values as-is.
+   Defining the block explicitly so the data-flavor attribute always
+   resolves to SOMETHING and downstream queries can rely on it. */
+[data-flavor="cool"] {
+  /* No overrides — foundation light-dark() pairs are tuned for cool. */
+}
+
+/* Warm flavor — warmer parchment on light, slightly warmer dark on dark.
+   Maps to what the legacy "grey" theme used to be. */
+[data-flavor="warm"] {
+  /* Page bg is warmer parchment on light surface; warmer dark on dark surface. */
+  --bg:      light-dark(#F7F4F0, #1A1A22);
+  --bg-card: light-dark(#FFFFFF, #22232E);
+  --bg-elev: light-dark(#EFEAE3, #2A2C38);
+
+  /* Borders pick up a touch more warmth */
+  --border:      light-dark(rgba(48, 30, 20, 0.10), rgba(232, 100, 60, 0.18));
+  --border-soft: light-dark(rgba(48, 30, 20, 0.06), rgba(232, 100, 60, 0.10));
+}
+
+/* Ember flavor — warm-charcoal palette. Most expressive on dark surface;
+   light surface uses warm-parchment + subtle ember accents.
+   (Light-side ember design deferred to cycle 12; for now it mirrors warm.) */
+[data-flavor="ember"] {
+  --bg:      light-dark(#F7F4F0, #1A1614);   /* warm charcoal on dark */
+  --bg-card: light-dark(#FFFFFF, #2A2018);
+  --bg-elev: light-dark(#EFEAE3, #2D241F);
+
+  /* Ember-specific border tint — a touch of clay */
+  --border:      light-dark(rgba(48, 30, 20, 0.10), rgba(216, 130, 90, 0.18));
+  --border-soft: light-dark(rgba(48, 30, 20, 0.06), rgba(216, 130, 90, 0.10));
+
+  /* Accent tilts slightly orange in ember */
+  --accent:      light-dark(#C0463A, #E26B47);
+  --accent-warm: light-dark(#C0463A, #E26B47);
+}

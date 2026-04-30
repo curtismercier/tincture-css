@@ -1,0 +1,17 @@
+{
+  "id": "minimalist-quiet",
+  "name": "Minimalist Quiet",
+  "doc": "Whisper-soft. Low contrast. Generous whitespace. The accent is barely there. Reads like a Japanese-Scandinavian gallery brochure.",
+  "base": "arzadon-default",
+  "tokens": {
+    "accent":      { "lightValue": "#7A7468", "darkValue": "#A89E8E" },
+    "accent-warm": { "lightValue": "#7A7468", "darkValue": "#A89E8E" },
+    "accent-fg":   { "lightValue": "#FFFFFF", "darkValue": "#1A1612" },
+    "ink":         { "lightValue": "#3A3530", "darkValue": "#E8E5E0" },
+    "ink-soft":    { "lightValue": "#7A7468", "darkValue": "#A89E8E" },
+    "bg":          { "lightValue": "#FAFAF7", "darkValue": "#1F1D1A" },
+    "bg-card":     { "lightValue": "#FFFFFF", "darkValue": "#28251F" },
+    "border":      { "lightValue": "rgba(58, 53, 48, 0.06)", "darkValue": "rgba(232, 229, 224, 0.08)" }
+  },
+  "axis-defaults": { "surface": "light", "flavor": "cool" }
+}

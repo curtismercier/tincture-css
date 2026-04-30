@@ -1,0 +1,16 @@
+{
+  "id": "clinical",
+  "name": "Clinical",
+  "doc": "Diagnostic-precision feel. Cooler. Tighter. Sharper. Trades editorial warmth for medical-grade clarity.",
+  "base": "arzadon-default",
+  "tokens": {
+    "accent":      { "lightValue": "#0B5FA6", "darkValue": "#3FA3F0" },
+    "accent-warm": { "lightValue": "#0B5FA6", "darkValue": "#3FA3F0" },
+    "ink":         { "lightValue": "#0F172A", "darkValue": "#F1F5F9" },
+    "bg":          { "lightValue": "#F8FAFC", "darkValue": "#0F172A" },
+    "bg-card":     { "lightValue": "#FFFFFF", "darkValue": "#1E293B" },
+    "bg-elev":     { "lightValue": "#F1F5F9", "darkValue": "#334155" },
+    "border":      { "lightValue": "rgba(15, 23, 42, 0.10)", "darkValue": "rgba(63, 163, 240, 0.15)" }
+  },
+  "axis-defaults": { "surface": "light", "flavor": "cool" }
+}

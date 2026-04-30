@@ -1,0 +1,268 @@
+{
+  "version": "0.1.0",
+  "generated": "2026-04-30",
+  "axes": {
+    "surface": [
+      "light",
+      "dark"
+    ],
+    "flavor": [
+      "cool",
+      "warm",
+      "ember"
+    ]
+  },
+  "tokens": {
+    "ink": {
+      "type": "color",
+      "lightValue": "#1A1612",
+      "darkValue": "#FFFFFF",
+      "doc": "Primary text color. Surface-aware via light-dark().",
+      "role": "text-primary",
+      "contrastPair": null,
+      "legacy": [
+        "--color-text-primary",
+        "--color-text-on-light",
+        "--color-text-on-dark",
+        "--color-text-on-booth",
+        "--color-text-on-accent-band"
+      ]
+    },
+    "ink-soft": {
+      "type": "color",
+      "lightValue": "#4A4540",
+      "darkValue": "#B8B8C4",
+      "doc": "Secondary text. Used for body copy, captions.",
+      "role": "text-secondary",
+      "contrastPair": null,
+      "legacy": [
+        "--color-text-secondary"
+      ]
+    },
+    "ink-muted": {
+      "type": "color",
+      "lightValue": "#6A655E",
+      "darkValue": "#8E91A3",
+      "doc": "Tertiary text. Metadata, timestamps.",
+      "role": "text-tertiary",
+      "contrastPair": null,
+      "legacy": [
+        "--color-text-muted"
+      ]
+    },
+    "bg": {
+      "type": "color",
+      "lightValue": "#F7F4F0",
+      "darkValue": "#12151C",
+      "doc": "Page background. Surface-aware.",
+      "role": "surface-page",
+      "contrastPair": null,
+      "legacy": [
+        "--color-bg-primary"
+      ]
+    },
+    "bg-card": {
+      "type": "color",
+      "lightValue": "#FFFFFF",
+      "darkValue": "#1A1E28",
+      "doc": "Card / surface block.",
+      "role": "surface-card",
+      "contrastPair": null,
+      "legacy": [
+        "--color-bg-surface"
+      ]
+    },
+    "bg-elev": {
+      "type": "color",
+      "lightValue": "#EFEAE3",
+      "darkValue": "#242A36",
+      "doc": "Elevated surface (raised cards, modals, popovers).",
+      "role": "surface-elevated",
+      "contrastPair": null,
+      "legacy": [
+        "--color-bg-elevated"
+      ]
+    },
+    "accent": {
+      "type": "color",
+      "lightValue": "#C41E3A",
+      "darkValue": "#E82E11",
+      "doc": "Primary accent. Surface-aware: deep crimson on light, vivid red on dark.",
+      "role": "accent-primary",
+      "contrastPair": "accent-fg",
+      "legacy": [
+        "--color-accent",
+        "--color-accent-gold",
+        "--color-accent-warm"
+      ]
+    },
+    "accent-fg": {
+      "type": "color",
+      "lightValue": "#FFFFFF",
+      "darkValue": "#FFFFFF",
+      "doc": "Ink color on accent surface. Always white. Surface-invariant.",
+      "role": "ink-on-accent",
+      "contrastPair": null,
+      "legacy": [
+        "--color-accent-fg",
+        "--color-text-on-accent",
+        "--color-text-on-gold"
+      ]
+    },
+    "accent-warm": {
+      "type": "color",
+      "lightValue": "#C41E3A",
+      "darkValue": "#E82E11",
+      "doc": "Warm-tier accent. Same as accent today; flavor layer can shift.",
+      "role": "accent-warm",
+      "contrastPair": null,
+      "legacy": []
+    },
+    "border": {
+      "type": "color",
+      "lightValue": "rgba(26, 22, 18, 0.12)",
+      "darkValue": "rgba(232, 46, 17, 0.18)",
+      "doc": "Default border at low alpha. Ink-tinted on light, accent-tinted on dark (matches the warm glow signature).",
+      "role": "border-default",
+      "contrastPair": null,
+      "legacy": [
+        "--color-border-default"
+      ]
+    },
+    "border-soft": {
+      "type": "color",
+      "lightValue": "rgba(26, 22, 18, 0.06)",
+      "darkValue": "rgba(232, 46, 17, 0.10)",
+      "doc": "Subtle border. Lower alpha of the border tint.",
+      "role": "border-subtle",
+      "contrastPair": null,
+      "legacy": [
+        "--color-border-subtle"
+      ]
+    }
+  },
+  "flavors": {
+    "cool": {
+      "doc": "Default flavor. Foundation tokens already represent cool. No overrides.",
+      "overrides": {}
+    },
+    "warm": {
+      "doc": "Warmer parchment / charcoal. Maps to legacy 'grey' theme.",
+      "overrides": {
+        "bg": {
+          "lightValue": "#F7F4F0",
+          "darkValue": "#1A1A22"
+        },
+        "bg-card": {
+          "lightValue": "#FFFFFF",
+          "darkValue": "#22232E"
+        },
+        "bg-elev": {
+          "lightValue": "#EFEAE3",
+          "darkValue": "#2A2C38"
+        },
+        "border": {
+          "lightValue": "rgba(48, 30, 20, 0.10)",
+          "darkValue": "rgba(232, 100, 60, 0.18)"
+        },
+        "border-soft": {
+          "lightValue": "rgba(48, 30, 20, 0.06)",
+          "darkValue": "rgba(232, 100, 60, 0.10)"
+        }
+      }
+    },
+    "ember": {
+      "doc": "Warm-charcoal palette. Most expressive on dark surface; light side mirrors warm.",
+      "overrides": {
+        "bg": {
+          "lightValue": "#F7F4F0",
+          "darkValue": "#1A1614"
+        },
+        "bg-card": {
+          "lightValue": "#FFFFFF",
+          "darkValue": "#2A2018"
+        },
+        "bg-elev": {
+          "lightValue": "#EFEAE3",
+          "darkValue": "#2D241F"
+        },
+        "border": {
+          "lightValue": "rgba(48, 30, 20, 0.10)",
+          "darkValue": "rgba(216, 130, 90, 0.18)"
+        },
+        "border-soft": {
+          "lightValue": "rgba(48, 30, 20, 0.06)",
+          "darkValue": "rgba(216, 130, 90, 0.10)"
+        },
+        "accent": {
+          "lightValue": "#C0463A",
+          "darkValue": "#E26B47"
+        },
+        "accent-warm": {
+          "lightValue": "#C0463A",
+          "darkValue": "#E26B47"
+        }
+      }
+    }
+  },
+  "components": {
+    "Hero": {
+      "file": "src/tenants/arzadon/components/Hero.tsx",
+      "surfaces": [
+        "dark"
+      ],
+      "doc": "Always-dark feature surface. data-surface=dark via cycle 1.",
+      "tokens-read": [
+        "accent",
+        "accent-fg",
+        "bg-card",
+        "border",
+        "ink",
+        "ink-muted",
+        "ink-soft"
+      ]
+    },
+    "Pricing": {
+      "file": "src/tenants/arzadon/components/Pricing.tsx",
+      "surfaces": [
+        "light",
+        "dark"
+      ],
+      "doc": "Renders on whatever surface the page provides. 74 token references — most token-dense component in the tenant.",
+      "tokens-read": [
+        "accent",
+        "accent-fg",
+        "accent-warm",
+        "bg",
+        "bg-card",
+        "bg-elev",
+        "border",
+        "border-soft",
+        "ink",
+        "ink-muted",
+        "ink-soft"
+      ],
+      "groups": [
+        "tier-card",
+        "comparison-table",
+        "feature-list"
+      ]
+    },
+    "ReviewSpotlight": {
+      "file": "src/tenants/arzadon/components/reviews/ReviewSpotlight.tsx",
+      "surfaces": [
+        "dark"
+      ],
+      "doc": "Always-dark booth-card surface (data-surface=dark). The interior cards inherit dark luminance so var(--ink) auto-flips to light.",
+      "tokens-read": [
+        "accent",
+        "accent-warm",
+        "bg-elev",
+        "border-soft",
+        "ink",
+        "ink-muted",
+        "ink-soft"
+      ]
+    }
+  }
+}

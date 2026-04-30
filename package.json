@@ -1,0 +1,30 @@
+{
+  "name": "@tincture/core",
+  "version": "0.1.0",
+  "description": "A drop changes the whole pour. Surface-aware design substrate for AI-mediated theming.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Curtis Mercier",
+  "homepage": "https://github.com/curtismercier/tincture",
+  "keywords": ["css", "design-tokens", "tailwindcss", "next-themes", "color-scheme", "light-dark", "ai-design"],
+  "main": "./src/manifest-loader.ts",
+  "types": "./src/_generated/tokens.d.ts",
+  "exports": {
+    ".": {
+      "import": "./src/manifest-loader.ts"
+    },
+    "./foundation.css": "./src/foundation/foundation.css",
+    "./flavors.css": "./src/foundation/flavors.css",
+    "./_generated/tokens.css": "./src/_generated/foundation.css",
+    "./_generated/manifest.json": "./src/_generated/manifest.json"
+  },
+  "bin": {
+    "tincture": "./src/cli/tincture.mjs"
+  },
+  "scripts": {
+    "test": "node src/cli/validate.mjs && node src/cli/contrast.mjs",
+    "codegen": "node src/cli/codegen.mjs"
+  },
+  "files": ["src/", "README.md", "LICENSE"],
+  "engines": { "node": ">=18.0.0" }
+}

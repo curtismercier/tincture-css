@@ -1,0 +1,16 @@
+{
+  "id": "aggressive-bold",
+  "name": "Aggressive Bold",
+  "doc": "High-contrast. Heavy. Vivid. Tight. For a brand that wants to read 'no compromise'.",
+  "base": "arzadon-default",
+  "tokens": {
+    "accent":      { "lightValue": "#E60000", "darkValue": "#FF1F0F" },
+    "accent-warm": { "lightValue": "#E60000", "darkValue": "#FF1F0F" },
+    "ink":         { "lightValue": "#000000", "darkValue": "#FFFFFF" },
+    "bg":          { "lightValue": "#FFFFFF", "darkValue": "#000000" },
+    "bg-card":     { "lightValue": "#FAFAFA", "darkValue": "#0A0A0A" },
+    "bg-elev":     { "lightValue": "#F0F0F0", "darkValue": "#1A1A1A" },
+    "border":      { "lightValue": "rgba(0, 0, 0, 0.20)", "darkValue": "rgba(255, 31, 15, 0.30)" }
+  },
+  "axis-defaults": { "surface": "light", "flavor": "cool" }
+}

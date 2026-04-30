@@ -1,0 +1,74 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   tincture/foundation.css — Phase 0 of the Tincture substrate.
+
+   Each token here is defined with light-dark(LIGHT_VALUE, DARK_VALUE).
+   The browser resolves to LIGHT_VALUE or DARK_VALUE based on the closest
+   ancestor's `color-scheme` declaration.
+
+   Why: surface luminance is the real concept. A button on a dark surface
+   needs light ink; on a light surface, dark ink. With per-theme blocks
+   we had to maintain that mapping by hand and were missing it (orphan
+   text-on-bg bugs). With light-dark() we declare the pair ONCE; the
+   surface decides which side wins.
+
+   Pair this with [data-surface] annotations on subtrees that flip
+   luminance vs the parent theme (e.g. dark feature sections embedded
+   inside a light page).
+
+   Generated 2026-04-30 (s01-91da41) by scripts/tincture-foundation.mjs.
+   See .soma/plans/tincture-2026-04-30/PLAN.md.
+   ────────────────────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Default scheme: light. Components inside [data-surface=dark] flip. */
+  color-scheme: light dark;
+}
+
+/* ── Surface declarations ──
+   data-surface=dark : flip color-scheme to dark, regardless of [data-theme=*]
+   data-surface=light : force color-scheme back to light (rare; nested override) */
+[data-surface="dark"]  { color-scheme: dark; }
+[data-surface="light"] { color-scheme: light; }
+
+/* ── Core tokens (pair = light value, dark value) ──
+   These resolve based on the closest ancestor with a color-scheme
+   declaration. Values match what existing [data-theme=*] blocks
+   produced, so this is a visual no-op for components that migrate. */
+
+:root {
+  /* Ink */
+  --ink:        light-dark(#1A1612, #FFFFFF);
+  --ink-soft:   light-dark(#4A4540, #B8B8C4);   /* secondary text */
+  --ink-muted:  light-dark(#6A655E, #8E91A3);   /* tertiary / metadata */
+
+  /* Surface backgrounds */
+  --bg:         light-dark(#F7F4F0, #12151C);
+  --bg-card:    light-dark(#FFFFFF, #1A1E28);
+  --bg-elev:    light-dark(#EFEAE3, #242A36);
+
+  /* Accent (saturated red — surface-aware) */
+  --accent:        light-dark(#C41E3A, #E82E11);
+  --accent-fg:     light-dark(#FFFFFF, #FFFFFF);
+  --accent-warm:   light-dark(#C41E3A, #E82E11);   /* same as accent for now; flavor layer can shift */
+  --accent-warm-fg: light-dark(#FFFFFF, #FFFFFF);
+
+  /* Borders + shadows (alpha-tinted accent for warmth) */
+  --border:        light-dark(rgba(26, 22, 18, 0.12), rgba(232, 46, 17, 0.18));
+  --border-soft:   light-dark(rgba(26, 22, 18, 0.06), rgba(232, 46, 17, 0.10));
+
+  /* Sentinel: never edit this in a mood preset — used to detect
+     whether tincture/foundation.css was successfully imported. */
+  --tincture-foundation-version: "0.1.0";
+}
+
+/* ── Sanity tests for during migration ──
+   Pages can opt in to verify their surface declarations work:
+
+     <body class="tincture-debug">
+       …
+     </body>
+
+   With this class on the root, each [data-surface] block gets a 2px
+   outline so you can see at a glance which subtrees are flipping. */
+.tincture-debug [data-surface="dark"]  { outline: 2px dashed #00ff88; }
+.tincture-debug [data-surface="light"] { outline: 2px dashed #00aaff; }
