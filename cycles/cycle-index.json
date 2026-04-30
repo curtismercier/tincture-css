@@ -5,10 +5,10 @@
   "summary": {
     "current_phase": 5,
     "active_cycles": [
-      "cycle-22"
+      "cycle-23"
     ],
     "open_audits": [],
-    "next": "Cycle 22 \u2014 multi-axis codegen. Read v0.2 registry via validateRegistry; emit cascade rules per axis-cell with compound attribute selectors. NO light-dark(). Idempotent. Spec in cycles/phase-5/cycle-21.md handoff section.",
+    "next": "Cycle 23 \u2014 lossless v0.1 \u2192 v0.2 registry migration. Acceptance: rendered CSS is byte-identical to live arzadon AND CDP eval shows zero visual change. See cycles/phase-5/cycle-22.md handoff.",
     "honest_count": {
       "real_and_verified": 11,
       "real_with_bug_shipped": 1,
@@ -324,8 +324,13 @@
       "id": "cycle-22",
       "phase": 5,
       "title": "Update codegen to emit multi-axis CSS from new registry",
-      "status": "queued",
-      "verification": "not-started"
+      "status": "done",
+      "verification": "34/34 codegen tests pass; output is idempotent + zero light-dark()",
+      "shipped": "2026-04-30",
+      "files": [
+        "src/cli/codegen-v2.mjs",
+        "tests/test-codegen.mjs"
+      ]
     },
     {
       "id": "cycle-23",
