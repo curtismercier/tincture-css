@@ -5,10 +5,10 @@
   "summary": {
     "current_phase": 5,
     "active_cycles": [
-      "cycle-23"
+      "cycle-24"
     ],
     "open_audits": [],
-    "next": "Cycle 23 \u2014 lossless v0.1 \u2192 v0.2 registry migration. Acceptance: rendered CSS is byte-identical to live arzadon AND CDP eval shows zero visual change. See cycles/phase-5/cycle-22.md handoff.",
+    "next": "Cycle 24 \u2014 visual audit of v0.2 migration via the-six personas + then typography tokens. Curtis: delegate audits, do not read screenshots inline.",
     "honest_count": {
       "real_and_verified": 11,
       "real_with_bug_shipped": 1,
@@ -336,8 +336,14 @@
       "id": "cycle-23",
       "phase": 5,
       "title": "Migrate v0.1 registry to axis-aware shape (lossless)",
-      "status": "queued",
-      "verification": "not-started"
+      "status": "done",
+      "verification": "37/37 migration tests + live CDP eval: hero+cta white on dark, root_ink light, version 0.2.0 sentinel",
+      "shipped": "2026-04-30",
+      "files": [
+        "src/cli/migrate-v01-to-v02.mjs",
+        "tests/test-migration.mjs",
+        "consumer-side: arzadon-fitness/studio commits a5808a8 + aec6f71"
+      ]
     },
     {
       "id": "cycle-24",
