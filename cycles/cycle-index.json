@@ -5,10 +5,10 @@
   "summary": {
     "current_phase": 5,
     "active_cycles": [
-      "cycle-24"
+      "cycle-25b: component primitives"
     ],
     "open_audits": [],
-    "next": "Cycle 24 \u2014 visual audit of v0.2 migration via the-six personas + then typography tokens. Curtis: delegate audits, do not read screenshots inline.",
+    "next": "Cycle 25b \u2014 author <Section variant=light|dark>, <Card>, <Pill> primitives that inject data-surface attrs. Eliminates per-use annotation. Cycle 26 = lint rule that catches missing annotations on raw <section>.",
     "honest_count": {
       "real_and_verified": 11,
       "real_with_bug_shipped": 1,
@@ -352,15 +352,26 @@
       "id": "cycle-24",
       "phase": 5,
       "title": "Add typography axis (surface, sometimes mood)",
-      "status": "queued",
-      "verification": "not-started"
+      "status": "done",
+      "verification": "registry+codegen ship 16 typography tokens; deployed live; weight-display surface-aware (700/800)",
+      "shipped": "2026-04-30",
+      "files": [
+        "arzadon: src/tenants/arzadon/tincture/registry.json (typography section)",
+        "arzadon: src/tenants/arzadon/tincture/_generated/foundation.css (16 new --tokens)"
+      ]
     },
     {
       "id": "cycle-25",
       "phase": 5,
-      "title": "Add spacing axis (tone-aware)",
-      "status": "queued",
-      "verification": "not-started"
+      "title": "Component primitives (Section/Card/Pill) + scan-surfaces.mjs scanner",
+      "status": "partial-shipped",
+      "verification": "scanner shipped (sweep caught 24 sections); component primitives queued for next sub-cycle",
+      "shipped": "2026-04-30",
+      "files": [
+        "src/cli/scan-surfaces.mjs",
+        "docs/architecture/why-not-automatic.md",
+        "arzadon: 24 page files updated by scan"
+      ]
     },
     {
       "id": "cycle-26",
