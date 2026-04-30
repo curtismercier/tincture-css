@@ -1,0 +1,50 @@
+{
+  "id": "performance",
+  "name": "Performance — vivid + tight + dramatic",
+  "doc": "High-saturation reds, heavy display weight (heavier on dark for legibility), tight leading + tracking, dramatic shadow on lifted cards (especially dark surfaces), snap motion. The 'something is happening' mood — fitness-coaching identity at full intensity. Replaces the muted default with a coordinated 11-cell delta across 4 token kinds.",
+  "schemaVersion": "2.0",
+  "axis-defaults": {
+    "surface": "dark",
+    "flavor": "ember"
+  },
+  "tokens": {
+    "accent": {
+      "values": {
+        "default": "#E62719",
+        "surface=dark": "#FF3A1A"
+      }
+    },
+    "weight-display": {
+      "values": {
+        "default": "900",
+        "surface=dark": "900"
+      }
+    },
+    "leading-tight": {
+      "values": {
+        "default": "1.0"
+      }
+    },
+    "track-display": {
+      "values": {
+        "default": "-0.03em"
+      }
+    },
+    "type-display-1": {
+      "values": {
+        "default": "clamp(3rem, 8vw, 6rem)"
+      }
+    },
+    "type-display-2": {
+      "values": {
+        "default": "clamp(2.25rem, 5.5vw, 3.75rem)"
+      }
+    },
+    "shadow-lifted": {
+      "values": {
+        "surface=dark": "0 8px 32px rgba(255,58,26,0.25)",
+        "elevation=dramatic,surface=dark": "0 24px 64px rgba(255,58,26,0.45)"
+      }
+    }
+  }
+}

@@ -5,10 +5,10 @@
   "summary": {
     "current_phase": 5,
     "active_cycles": [
-      "cycle-25b: component primitives"
+      "cycle-27: migrate components to typography tokens"
     ],
     "open_audits": [],
-    "next": "Cycle 25b \u2014 author <Section variant=light|dark>, <Card>, <Pill> primitives that inject data-surface attrs. Eliminates per-use annotation. Cycle 26 = lint rule that catches missing annotations on raw <section>.",
+    "next": "Cycle 27 \u2014 Hero h1 hardcoded text-7xl/font-bold/tracking-tight \u2192 var(--type-display-1)/var(--weight-display)/var(--track-display). After: applying Performance mood will visibly change weight + scale + leading. Cycle 28 = apply + visual demo.",
     "honest_count": {
       "real_and_verified": 11,
       "real_with_bug_shipped": 1,
@@ -376,14 +376,20 @@
     {
       "id": "cycle-26",
       "phase": 5,
-      "title": "Add radius + shadow tokens",
-      "status": "queued",
-      "verification": "not-started"
+      "title": "Brand-lock primitives + mood engine v0.2 + Performance mood JSON",
+      "status": "done",
+      "verification": "validator rejects mood-targets-locked-token; mood preview shows 10-cell delta across 4 kinds",
+      "shipped": "2026-04-30",
+      "files": [
+        "src/cli/mood-v2.mjs",
+        "src/moods/performance.json",
+        "arzadon: 3 brand-lock + 3 shadow tokens added"
+      ]
     },
     {
       "id": "cycle-27",
       "phase": 5,
-      "title": "Add motion tokens + transition shorthand",
+      "title": "Migrate Hero h1 + StatsStrip to typography tokens",
       "status": "queued",
       "verification": "not-started"
     },
