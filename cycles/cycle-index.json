@@ -4,11 +4,9 @@
   "updated": "2026-04-30",
   "summary": {
     "current_phase": 5,
-    "active_cycles": [
-      "cycle-27: migrate components to typography tokens"
-    ],
+    "active_cycles": [],
     "open_audits": [],
-    "next": "Cycle 27 \u2014 Hero h1 hardcoded text-7xl/font-bold/tracking-tight \u2192 var(--type-display-1)/var(--weight-display)/var(--track-display). After: applying Performance mood will visibly change weight + scale + leading. Cycle 28 = apply + visual demo.",
+    "next": "Cycle 28 \u2014 Performance mood already applied (10 cells across color+typography+shadow). Live demo working. Visual verify Hero h1 weight bump + accent shift via delegated audit. Then cycle 29 \u2014 Transformation mood + cycle 30 \u2014 component primitives <Section variant>.",
     "honest_count": {
       "real_and_verified": 11,
       "real_with_bug_shipped": 1,
@@ -32,6 +30,13 @@
       "tool_lives_at": "~/Gravicity/personal/tincture-css",
       "consumer_lives_at": "~/Gravicity/clients/arzadon-fitness/studio",
       "rule": "Project plans + cycle docs live ONLY in personal/tincture-css. Arzadon imports the tool and contains only consumer-side config + the local copy of foundation files for the live build."
+    },
+    "live_state": {
+      "tincture_version": "0.2.2",
+      "mood_applied": "performance",
+      "baseline_archived": "arzadon: registry.baseline.json (reset via tincture-mood-v2 reset)",
+      "cascade_verified": true,
+      "data_surface_annotations_per_subtree": true
     }
   },
   "phases": [
@@ -363,14 +368,15 @@
     {
       "id": "cycle-25",
       "phase": 5,
-      "title": "Component primitives (Section/Card/Pill) + scan-surfaces.mjs scanner",
-      "status": "partial-shipped",
-      "verification": "scanner shipped (sweep caught 24 sections); component primitives queued for next sub-cycle",
+      "title": "Surface scanner + codegen auto-fill (axis-value reset cells)",
+      "status": "done",
+      "verification": "CDP runtime: header_ink=#1a1612 + menu_link_color=rgb(26,22,18) inside html data-surface=dark \u2014 cascade reset works",
       "shipped": "2026-04-30",
       "files": [
-        "src/cli/scan-surfaces.mjs",
+        "src/cli/scan-surfaces.mjs (extended scanner)",
+        "src/cli/codegen-v2.mjs (auto-fill cells)",
         "docs/architecture/why-not-automatic.md",
-        "arzadon: 24 page files updated by scan"
+        "arzadon: 4 surface annotations + data-theme\u2192data-surface sweep"
       ]
     },
     {

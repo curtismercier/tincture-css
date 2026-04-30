@@ -83,12 +83,55 @@ function emitFoundationCSS() {
   lines.push(`/* Run: pnpm tincture:codegen */`);
   lines.push(``);
 
+  // Auto-fill axis-value reset cells.
+  //
+  // Why: cascade composition is broken if a token declares axis=X with
+  // only SOME values present. E.g. token `--ink` has axes:['surface'] and
+  // values { default: '#1A1612', 'surface=dark': '#fff' }. The output:
+  //   :root                     { --ink: #1A1612 }
+  //   [data-surface="dark"]     { --ink: #fff }
+  //   [data-surface="light"]    { /* empty — NO --ink override */ }
+  // Now if a descendant of [data-surface="dark"] declares
+  // [data-surface="light"], it inherits --ink: #fff (from the dark
+  // ancestor) instead of resetting to #1A1612. Bug.
+  //
+  // Fix: for every token T with axes A, for every value V of every axis
+  // in A, ensure T has a value at V. Auto-fill missing values from the
+  // default (or the most-specific declared compound cell). The reset
+  // value re-declares default explicitly, so a sibling [data-X=other-V]
+  // resets correctly via cascade.
+  const AXIS_VALUES_RUNTIME = {
+    surface: ['light', 'dark'],
+    flavor: ['cool', 'warm', 'ember'],
+    tone: ['feature', 'prose', 'surface', 'brand-band'],
+    elevation: ['flat', 'lifted', 'dramatic'],
+  };
+
+  function autoFillToken(tok) {
+    if (tok.axes.length === 0) return tok.values; // no axes → no fill
+    const filled = { ...tok.values };
+    // For each axis the token responds to, ensure every axis-value is
+    // either explicitly declared OR inherits the default. We add a
+    // single-axis cell for the default value of each axis-value that
+    // doesn't already exist as a single-axis cell.
+    for (const axis of tok.axes) {
+      for (const value of AXIS_VALUES_RUNTIME[axis] || []) {
+        const cellKey = `${axis}=${value}`;
+        if (filled[cellKey] === undefined) {
+          filled[cellKey] = filled.default;
+        }
+      }
+    }
+    return filled;
+  }
+
   // Collect all (cellKey → [{tokenId, value}]) so we emit one rule per
   // unique cellKey (group all tokens for that cell into one CSS block).
   // This produces denser output AND keeps cascade specificity uniform.
   const cellGroups = new Map(); // cellKey → [{ id, value, doc }]
   for (const [tokenId, tok] of Object.entries(reg.tokens)) {
-    for (const [cellKey, value] of Object.entries(tok.values)) {
+    const filled = autoFillToken(tok);
+    for (const [cellKey, value] of Object.entries(filled)) {
       if (!cellGroups.has(cellKey)) cellGroups.set(cellKey, []);
       cellGroups.get(cellKey).push({ id: tokenId, value, doc: tok.doc });
     }
