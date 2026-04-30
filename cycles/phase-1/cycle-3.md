@@ -2,7 +2,9 @@
 id: cycle-3
 phase: 1
 title: Component migration wave 1 — Hero + Pricing + ReviewSpotlight
-status: active
+status: done
+shipped: 2026-04-30
+commit: 0cd7dfd
 created: 2026-04-30
 seeded-by: cycle-2
 proving-ground: Gravicity/studio
@@ -25,11 +27,11 @@ Migrate 3 anchor components to read foundation tokens directly (`var(--ink)`, `v
 
 ## Spec
 
-- [ ] Migrate Hero.tsx: `var(--color-accent-gold)` → `var(--accent)`, `var(--color-text-primary)` → `var(--ink)`, etc.
-- [ ] Migrate Pricing.tsx: same migration map
-- [ ] Migrate ReviewSpotlight.tsx: same; verify `data-surface="dark"` from cycle 1 still works
-- [ ] Write `tincture-migrate-components.mjs` with explicit before/after className rule pairs (ENGINE: reuse sweep-button-tokens.mjs's glob pattern)
-- [ ] Token alias map (added to foundation.css): legacy names point at foundation tokens for ROW 4-7 components (back-compat layer to support gradual migration)
+- [x] Migrate Hero.tsx: `var(--color-accent-gold)` → `var(--accent)`, `var(--color-text-primary)` → `var(--ink)`, etc.
+- [x] Migrate Pricing.tsx: same migration map
+- [x] Migrate ReviewSpotlight.tsx: same; verify `data-surface="dark"` from cycle 1 still works
+- [x] Write `tincture-migrate-components.mjs` with explicit before/after className rule pairs (ENGINE: reuse sweep-button-tokens.mjs's glob pattern)
+- [x] Token alias map (added to foundation.css): legacy names point at foundation tokens for ROW 4-7 components (back-compat layer to support gradual migration)
 
   ```css
   :root {
@@ -41,10 +43,10 @@ Migrate 3 anchor components to read foundation tokens directly (`var(--ink)`, `v
   }
   ```
 
-- [ ] Build passes
-- [ ] Visual no-op verified on home + Hero / Pricing / ReviewSpotlight isolated routes
-- [ ] Audit: no contact-form regression from `color-scheme` propagation
-- [ ] Expand cycle 4 spec with token-naming patterns observed (decisions land in cycle 4 schema)
+- [x] Build passes
+- [x] Visual no-op verified on home + Hero / Pricing / ReviewSpotlight isolated routes
+- [x] Audit: no contact-form regression from `color-scheme` propagation
+- [x] Expand cycle 4 spec with token-naming patterns observed (decisions land in cycle 4 schema)
 
 ## Decision tree — open questions
 
@@ -66,12 +68,12 @@ Migrate 3 anchor components to read foundation tokens directly (`var(--ink)`, `v
 
 ## Acceptance
 
-- [ ] Hero / Pricing / ReviewSpotlight reference foundation tokens (no `var(--color-*)` in their JSX className)
-- [ ] `tincture/legacy-aliases.css` exists with ≥10 alias declarations
-- [ ] `pnpm build` passes
-- [ ] `tincture-migrate-components.mjs --check` clean
-- [ ] Home page renders identically to pre-cycle-3 (manual)
-- [ ] Cycle 4 spec is expanded
+- [x] Hero / Pricing / ReviewSpotlight reference foundation tokens (no `var(--color-*)` in their JSX className)
+- [x] `tincture/legacy-aliases.css` exists with ≥10 alias declarations
+- [x] `pnpm build` passes
+- [x] `tincture-migrate-components.mjs --check` clean
+- [x] Home page renders identically to pre-cycle-3 (manual)
+- [x] Cycle 4 spec is expanded
 
 ## Files
 

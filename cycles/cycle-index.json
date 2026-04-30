@@ -6,7 +6,24 @@
     "current_phase": 4,
     "active_cycles": [],
     "open_audits": [],
-    "next": "20/20 cycles complete. v0.1.0 ready for npm publish (cycle 20 final step). Post-publish work: Astro Starlight docs site, full VSCode extension, web playground, typography tokens."
+    "next": "v0.2 scope: typography + spacing + radius + shadow + motion tokens; brand-lock primitives; mood deltas across all surfaces; visual verification on every cycle. See cycles/v02-scope.md.",
+    "honest_count": {
+      "real_and_verified": 11,
+      "real_with_bug_shipped": 1,
+      "real_tool_unused": 1,
+      "real_batched": 4,
+      "real_untested_as_package": 3,
+      "stub": 1,
+      "not_actually_published": 1
+    },
+    "known_bugs": [
+      "cycle 9 preview script never executed against live",
+      "cycle 17 create.mjs never tested in fresh sandbox",
+      "cycle 19 VSCode extension is a stub (manifest only)",
+      "cycle 20 npm publish was preparation only \u2014 not published",
+      "mood deltas are color-only (4 token kinds: bg/ink/accent/border) \u2014 cannot express Performance/Transformation moods"
+    ],
+    "audit_report": "../arzadon-fitness/.soma/reports/tincture-cycle-audit-2026-04-30.md"
   },
   "phases": [
     {
@@ -66,14 +83,17 @@
       "status": "done",
       "doc": "cycles/phase-1/cycle-1.md",
       "commit": "25dd915",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "verified"
     },
     {
       "id": "cycle-2",
       "phase": 1,
       "title": "Surface untangle: theme = surface x flavor",
-      "status": "active",
-      "doc": "cycles/phase-1/cycle-2.md"
+      "status": "done",
+      "doc": "cycles/phase-1/cycle-2.md",
+      "verification": "build-ok",
+      "commit": "a7aa64d"
     },
     {
       "id": "cycle-3",
@@ -82,7 +102,8 @@
       "status": "done",
       "doc": "cycles/phase-1/cycle-3.md",
       "commit": "0cd7dfd",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "build-ok"
     },
     {
       "id": "cycle-4",
@@ -91,7 +112,8 @@
       "status": "done",
       "doc": "cycles/phase-2/cycle-4.md",
       "commit": "89f577f",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "verified"
     },
     {
       "id": "cycle-5",
@@ -100,23 +122,27 @@
       "status": "done",
       "doc": "cycles/phase-2/cycle-5.md",
       "commit": "2aa2d49",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "verified"
     },
     {
       "id": "cycle-6",
       "phase": 2,
       "title": "Studio reads manifest (kill stale TOKEN_GROUPS)",
-      "status": "active",
-      "doc": "cycles/phase-2/cycle-6.md"
+      "status": "done",
+      "doc": "cycles/phase-2/cycle-6.md",
+      "verification": "verified",
+      "commit": "add0a32"
     },
     {
       "id": "cycle-7",
       "phase": 2,
       "title": "Component migration wave 2: tokenize remaining 12+ components",
-      "status": "done",
+      "status": "done-with-bug-shipped",
       "doc": "cycles/phase-2/cycle-7.md",
       "commit": "79e8b39",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "caught-by-curtis"
     },
     {
       "id": "cycle-8",
@@ -125,16 +151,18 @@
       "status": "done",
       "doc": "cycles/phase-3/cycle-8.md",
       "commit": "810e549",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "verified"
     },
     {
       "id": "cycle-9",
       "phase": 3,
       "title": "Multi-state preview (headless capture grid)",
-      "status": "done",
+      "status": "code-shipped-never-run",
       "doc": "cycles/phase-3/cycle-9.md",
       "commit": "93b2f43",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "tool-unused"
     },
     {
       "id": "cycle-10",
@@ -143,7 +171,8 @@
       "status": "done",
       "doc": "cycles/phase-3/cycle-10.md",
       "commit": "b63c962",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "verified"
     },
     {
       "id": "cycle-11",
@@ -152,43 +181,48 @@
       "status": "done",
       "doc": "cycles/phase-3/cycle-11.md",
       "commit": "62aafca",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "verified"
     },
     {
       "id": "cycle-12",
       "phase": 4,
       "title": "Mood preset: arzadon-default (baseline)",
-      "status": "done",
+      "status": "batched",
       "doc": "cycles/phase-4/cycle-12.md",
       "commit": "45ed0bd",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "untested"
     },
     {
       "id": "cycle-13",
       "phase": 4,
       "title": "Mood preset: clinical (cooler, tighter, sharper)",
-      "status": "done",
+      "status": "batched",
       "doc": "cycles/phase-4/cycle-13.md",
       "commit": "45ed0bd",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "untested"
     },
     {
       "id": "cycle-14",
       "phase": 4,
       "title": "Mood preset: editorial-warm (serif, parchment, soft)",
-      "status": "done",
+      "status": "batched",
       "doc": "cycles/phase-4/cycle-14.md",
       "commit": "45ed0bd",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "untested"
     },
     {
       "id": "cycle-15",
       "phase": 4,
       "title": "Mood preset: aggressive-bold + minimalist-quiet + luxurious-refined",
-      "status": "done",
+      "status": "batched",
       "doc": "cycles/phase-4/cycle-15.md",
       "commit": "45ed0bd",
-      "shipped": "2026-04-30"
+      "shipped": "2026-04-30",
+      "verification": "untested"
     },
     {
       "id": "cycle-16",
@@ -197,16 +231,18 @@
       "status": "done",
       "doc": "cycles/phase-4/cycle-16.md",
       "shipped": "2026-04-30",
-      "commit": "d60d1b3"
+      "commit": "d60d1b3",
+      "verification": "untested-as-package"
     },
     {
       "id": "cycle-17",
       "phase": 4,
       "title": "Scaffold CLI: npx create-tincture for fresh Next.js + Tailwind v4",
-      "status": "done",
+      "status": "untested",
       "doc": "cycles/phase-4/cycle-17.md",
       "shipped": "2026-04-30",
-      "commit": "d60d1b3"
+      "commit": "d60d1b3",
+      "verification": "never-run-in-sandbox"
     },
     {
       "id": "cycle-18",
@@ -215,7 +251,8 @@
       "status": "done",
       "doc": "cycles/phase-4/cycle-18.md",
       "shipped": "2026-04-30",
-      "commit": "d60d1b3"
+      "commit": "d60d1b3",
+      "verification": "docs-only"
     },
     {
       "id": "cycle-19",
@@ -224,16 +261,18 @@
       "status": "stub",
       "doc": "cycles/phase-4/cycle-19.md",
       "shipped": "2026-04-30",
-      "commit": "d60d1b3"
+      "commit": "d60d1b3",
+      "verification": "no-implementation"
     },
     {
       "id": "cycle-20",
       "phase": 4,
       "title": "Web playground (Tweakcn-style) + npm publish v0.1.0",
-      "status": "ready-to-publish",
+      "status": "not-published",
       "doc": "cycles/phase-4/cycle-20.md",
       "shipped": "2026-04-30",
-      "commit": "d60d1b3"
+      "commit": "d60d1b3",
+      "verification": "misnamed-ready"
     }
   ]
 }

@@ -2,7 +2,9 @@
 id: cycle-5
 phase: 2
 title: Codegen — registry → CSS + TS + manifest
-status: active
+status: done
+shipped: 2026-04-30
+commit: 2aa2d49
 created: 2026-04-30
 seeded-by: cycle-4
 proving-ground: Gravicity/studio
@@ -22,17 +24,17 @@ proving-ground: Gravicity/studio
 
 ## Spec
 
-- [ ] Write `tincture-codegen.mjs`:
+- [x] Write `tincture-codegen.mjs`:
   - Read registry.json
   - Run validator first (exit 1 on error)
   - Emit `tincture/_generated/foundation.css` (the same content as hand-authored, regenerated from registry)
   - Emit `tincture/_generated/flavors.css`
   - Emit `tincture/_generated/manifest.json` (flat shape: `{tokens: {id: {value-light, value-dark, doc, role}}, components: [...]}`)
   - Emit `tincture/_generated/tokens.d.ts` (`export type SemanticToken = 'ink' | 'bg' | ...`)
-- [ ] Switch globals.css to import from `_generated/` (deprecate hand-authored foundation.css + flavors.css, keep them only as templates if needed)
-- [ ] Add `tincture:codegen` script to package.json + run before next build via prebuild chain
-- [ ] Verify: regen produces deterministic output (run twice, diff must be empty)
-- [ ] Verify: pnpm build succeeds with regenerated CSS
+- [x] Switch globals.css to import from `_generated/` (deprecate hand-authored foundation.css + flavors.css, keep them only as templates if needed)
+- [x] Add `tincture:codegen` script to package.json + run before next build via prebuild chain
+- [x] Verify: regen produces deterministic output (run twice, diff must be empty)
+- [x] Verify: pnpm build succeeds with regenerated CSS
 
 ## Decision tree
 
@@ -53,13 +55,13 @@ proving-ground: Gravicity/studio
 
 ## Acceptance
 
-- [ ] `tincture-codegen.mjs` runs successfully
-- [ ] `tincture/_generated/{foundation.css, flavors.css, manifest.json, tokens.d.ts}` exist
-- [ ] globals.css imports from `_generated/`
-- [ ] `pnpm build` passes
-- [ ] `tincture-validate-registry.mjs` passes (no drift introduced)
-- [ ] Two consecutive `tincture:codegen` runs produce identical output (idempotent)
-- [ ] Cycle 6 spec expanded
+- [x] `tincture-codegen.mjs` runs successfully
+- [x] `tincture/_generated/{foundation.css, flavors.css, manifest.json, tokens.d.ts}` exist
+- [x] globals.css imports from `_generated/`
+- [x] `pnpm build` passes
+- [x] `tincture-validate-registry.mjs` passes (no drift introduced)
+- [x] Two consecutive `tincture:codegen` runs produce identical output (idempotent)
+- [x] Cycle 6 spec expanded
 
 ## Files
 

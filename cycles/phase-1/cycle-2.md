@@ -2,7 +2,9 @@
 id: cycle-2
 phase: 1
 title: Surface untangle — theme = surface × flavor
-status: active
+status: done
+shipped: 2026-04-30
+commit: a7aa64d
 created: 2026-04-30
 session: s01-91da41
 seeded-by: cycle-1
@@ -21,20 +23,20 @@ Today's `[data-theme=*]` selector conflates two orthogonal concepts: surface lum
 
 ## Spec
 
-- [ ] Define `[data-flavor="cool"]`, `[data-flavor="warm"]`, `[data-flavor="ember"]` blocks in `tincture/foundation.css` (or sibling `tincture/flavors.css`)
+- [x] Define `[data-flavor="cool"]`, `[data-flavor="warm"]`, `[data-flavor="ember"]` blocks in `tincture/foundation.css` (or sibling `tincture/flavors.css`)
   - Cool: current grey theme — slightly bluish parchment
   - Warm: current grey theme — slightly warmer parchment (default)
   - Ember: current ember theme — warm-charcoal even on light surface
-- [ ] ThemeProvider rewrites: store `surface` + `flavor` independently in localStorage; render both attributes on `<html>`
-- [ ] Back-compat shim: existing `useTheme()` callers still work (theme name maps bidirectionally to surface×flavor pair)
-- [ ] Migration mapping locked:
+- [x] ThemeProvider rewrites: store `surface` + `flavor` independently in localStorage; render both attributes on `<html>`
+- [x] Back-compat shim: existing `useTheme()` callers still work (theme name maps bidirectionally to surface×flavor pair)
+- [x] Migration mapping locked:
   - `theme=light` → `surface=light, flavor=cool`
   - `theme=grey`  → `surface=light, flavor=warm`
   - `theme=dark`  → `surface=dark, flavor=cool`
   - `theme=ember` → `surface=dark, flavor=ember`
-- [ ] Drop redundant per-theme token definitions in `globals.css` for the 12 foundation tokens (already covered by light-dark() pairs)
-- [ ] Verify visual no-op across all 4 prior themes via build + sweeper check
-- [ ] Add `tincture-untangle.mjs` script (idempotent like cycle-1's foundation.mjs)
+- [x] Drop redundant per-theme token definitions in `globals.css` for the 12 foundation tokens (already covered by light-dark() pairs)
+- [x] Verify visual no-op across all 4 prior themes via build + sweeper check
+- [x] Add `tincture-untangle.mjs` script (idempotent like cycle-1's foundation.mjs)
 
 ## Decision tree — open questions
 
@@ -59,13 +61,13 @@ Today's `[data-theme=*]` selector conflates two orthogonal concepts: surface lum
 
 ## Acceptance
 
-- [ ] `tincture/flavors.css` exists with 3 flavor blocks (cool/warm/ember)
-- [ ] ThemeProvider sets `data-surface` + `data-flavor` on `<html>`
-- [ ] All 4 prior theme combinations render visually identically (manual screenshot diff on home + about + personal-trainer-toronto)
-- [ ] `[data-theme=light]` block in globals.css ≤ 30 lines (was ~70 before; flavor + foundation now cover the rest)
-- [ ] `pnpm build` passes
-- [ ] `node scripts/tincture-untangle.mjs --check` passes
-- [ ] cycle-3.md spec is EXPANDED with anything cycle-2 surfaced
+- [x] `tincture/flavors.css` exists with 3 flavor blocks (cool/warm/ember)
+- [x] ThemeProvider sets `data-surface` + `data-flavor` on `<html>`
+- [x] All 4 prior theme combinations render visually identically (manual screenshot diff on home + about + personal-trainer-toronto)
+- [x] `[data-theme=light]` block in globals.css ≤ 30 lines (was ~70 before; flavor + foundation now cover the rest)
+- [x] `pnpm build` passes
+- [x] `node scripts/tincture-untangle.mjs --check` passes
+- [x] cycle-3.md spec is EXPANDED with anything cycle-2 surfaced
 
 ## Files
 

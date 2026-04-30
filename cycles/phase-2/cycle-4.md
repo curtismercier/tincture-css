@@ -2,7 +2,9 @@
 id: cycle-4
 phase: 2
 title: Registry — tokens/registry.json + schema
-status: active
+status: done
+shipped: 2026-04-30
+commit: 89f577f
 created: 2026-04-30
 seeded-by: cycle-3
 proving-ground: Gravicity/studio
@@ -22,15 +24,15 @@ Single source of truth at `tincture/registry.json`. Models tokens, components, s
 
 ## Spec
 
-- [ ] Define schema (TypeScript types) for the registry:
+- [x] Define schema (TypeScript types) for the registry:
   - `Primitive` — raw value (`{name, value}`)
   - `SemanticToken` — typed surface-aware (`{id, type, lightValue, darkValue, doc, role?, contrastPair?}`)
   - `FlavorToken` — flavor-specific overrides (`{id, flavor, lightValue, darkValue, doc}`)
   - `LegacyAlias` — old name + new name (`{legacy, foundation, scheduledRemoval: 'cycle-7'}`)
   - `ComponentManifest` — component contract (`{name, file, surfaces[], tokens[], groups?}`)
-- [ ] Author `tincture/registry.json` with all current tokens + 3 migrated components (Hero, Pricing, ReviewSpotlight)
-- [ ] Validation script: `tincture-validate-registry.mjs` — walks registry against schema, flags drift between registry values and foundation.css
-- [ ] Document the schema in `tincture/registry-schema.md`
+- [x] Author `tincture/registry.json` with all current tokens + 3 migrated components (Hero, Pricing, ReviewSpotlight)
+- [x] Validation script: `tincture-validate-registry.mjs` — walks registry against schema, flags drift between registry values and foundation.css
+- [x] Document the schema in `tincture/registry-schema.md`
 
 ## Decision tree — open questions
 
@@ -61,11 +63,11 @@ Single source of truth at `tincture/registry.json`. Models tokens, components, s
 
 ## Acceptance
 
-- [ ] `tincture/registry.json` exists with ≥12 SemanticTokens, ≥3 FlavorTokens, ≥3 ComponentManifests
-- [ ] `tincture/registry-schema.md` documents the schema
-- [ ] `studio/scripts/tincture-validate-registry.mjs --check` passes
-- [ ] No drift between registry token values and `tincture/foundation.css` values
-- [ ] Cycle 5 spec is expanded with codegen-specific findings
+- [x] `tincture/registry.json` exists with ≥12 SemanticTokens, ≥3 FlavorTokens, ≥3 ComponentManifests
+- [x] `tincture/registry-schema.md` documents the schema
+- [x] `studio/scripts/tincture-validate-registry.mjs --check` passes
+- [x] No drift between registry token values and `tincture/foundation.css` values
+- [x] Cycle 5 spec is expanded with codegen-specific findings
 
 ## Files
 
