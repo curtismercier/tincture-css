@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 220" width="700" height="220">
+  <rect width="700" height="220" fill="#12151C" rx="12"/>
+  <defs>
+    <style>
+      .mono { font: 10px/1.4 'SF Mono','Fira Code',monospace; fill: rgba(255,255,255,0.35); }
+      .tok  { font: 10px/1.4 'SF Mono','Fira Code',monospace; fill: #E82E11; }
+    </style>
+  </defs>
+
+  <!-- display-1 -->
+  <text x="32" y="68" font-size="52" font-weight="900" fill="#fff" letter-spacing="-2" font-family="system-ui,sans-serif">Transform</text>
+  <text x="32" y="86" class="tok">--type-display-1: clamp(3rem, 8vw, 6rem)</text>
+  <text x="32" y="100" class="mono">--weight-display: 900  ·  --track-display: -0.03em</text>
+
+  <line x1="32" y1="114" x2="668" y2="114" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+  <!-- display-2 -->
+  <text x="32" y="148" font-size="28" font-weight="700" fill="rgba(255,255,255,0.85)" font-family="system-ui,sans-serif">Results That Last</text>
+  <text x="32" y="163" class="tok">--type-display-2: clamp(1.75rem, 4vw, 2.5rem)</text>
+  <text x="32" y="177" class="mono">--weight-heading: 700</text>
+
+  <line x1="32" y1="188" x2="668" y2="188" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+
+  <!-- body-1 -->
+  <text x="32" y="210" font-size="15" fill="rgba(255,255,255,0.55)" font-family="system-ui,sans-serif">Every session, every meal, every metric — intentional.</text>
+  <text x="510" y="210" class="tok" font-size="9">--type-body-1</text>
+</svg>

@@ -5,7 +5,7 @@
 A surface-aware, multi-axis design substrate for AI-mediated theming. One mood delta shifts an entire visual identity — typography, color, spacing, shadows, radius — coordinated across every surface simultaneously.
 
 **Version:** 0.2.2 · **Status:** Active  
-**Origin:** Built for [Arzadon Fitness](https://arzadonfitness.com) (Next.js 15 + Tailwind v4). Extracted as a standalone substrate.
+**Origin:** Built during the Next.js rebuild of [Arzadon Fitness](https://arzadonfitness.com), a Toronto personal training studio. Extracted as a standalone substrate.
 
 ---
 
@@ -32,45 +32,7 @@ tincture scan
 
 ### Surfaces: one token, four resolutions
 
-```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 180" width="760" height="180">
-  <defs>
-    <style>
-      .label { font: 11px/1.4 'SF Mono', 'Fira Code', monospace; fill: rgba(255,255,255,0.45); }
-      .token { font: 10px/1.4 'SF Mono', 'Fira Code', monospace; fill: rgba(255,255,255,0.25); }
-      .val   { font: 13px/1.4 'SF Mono', 'Fira Code', monospace; font-weight: 600; }
-    </style>
-  </defs>
-
-  <!-- dark surface -->
-  <rect x="0"   y="0" width="180" height="180" rx="10" fill="#12151C"/>
-  <text x="16"  y="28" class="label">data-surface="dark"</text>
-  <text x="16"  y="90" class="val" fill="#FFFFFF">--ink: #FFFFFF</text>
-  <text x="16"  y="110" class="val" fill="#E82E11">--accent: #E82E11</text>
-  <text x="16"  y="130" class="token">--bg: #12151C</text>
-
-  <!-- slate surface -->
-  <rect x="193" y="0" width="180" height="180" rx="10" fill="#242A36"/>
-  <text x="209" y="28" class="label">data-surface="slate"</text>
-  <text x="209" y="90" class="val" fill="#F0EDE8">--ink: #F0EDE8</text>
-  <text x="209" y="110" class="val" fill="#E82E11">--accent: #E82E11</text>
-  <text x="209" y="130" class="token">--bg: #242A36</text>
-
-  <!-- steel surface -->
-  <rect x="386" y="0" width="180" height="180" rx="10" fill="#1C1F28"/>
-  <text x="402" y="28" class="label">data-surface="steel"</text>
-  <text x="402" y="90" class="val" fill="#F0EDE8">--ink: #F0EDE8</text>
-  <text x="402" y="110" class="val" fill="#E82E11">--accent: #E82E11</text>
-  <text x="402" y="130" class="token">--bg: #1C1F28</text>
-
-  <!-- light surface -->
-  <rect x="579" y="0" width="180" height="180" rx="10" fill="#F7F4F0" stroke="#E0DBD4" stroke-width="1"/>
-  <text x="595" y="28" class="label" style="fill:#888">data-surface="light"</text>
-  <text x="595" y="90" class="val" fill="#1A1612">--ink: #1A1612</text>
-  <text x="595" y="110" class="val" fill="#C2200E">--accent: #C2200E</text>
-  <text x="595" y="130" class="token" style="fill:#aaa">--bg: #F7F4F0</text>
-</svg>
-```
+![Surface system — four surfaces, one token matrix](assets/surfaces.svg)
 
 The same component renders correctly on all four surfaces with **zero per-surface overrides**. One annotation (`data-surface="dark"`) — the cascade does the rest.
 
@@ -112,60 +74,7 @@ No polyfills. No `light-dark()` (it freezes at `:root`'s `color-scheme`; see [`d
 
 A mood is a JSON delta — token → axis-cell → new value. Apply one, every consumer token shifts together:
 
-```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" width="720" height="200">
-  <defs>
-    <style>
-      .mono { font: 11px/1.6 'SF Mono', 'Fira Code', monospace; }
-      .head { font: 12px/1 'SF Mono', 'Fira Code', monospace; font-weight: 700; fill: #fff; }
-      .dim  { fill: rgba(255,255,255,0.35); }
-      .acc  { fill: #E82E11; }
-      .grn  { fill: #4ade80; }
-      .arr  { fill: none; stroke: rgba(255,255,255,0.2); stroke-width: 1.5; marker-end: url(#arr); }
-    </style>
-    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="rgba(255,255,255,0.3)"/>
-    </marker>
-  </defs>
-  <rect width="720" height="200" fill="#0D1017" rx="12"/>
-
-  <!-- baseline -->
-  <rect x="20" y="20" width="200" height="160" rx="8" fill="#12151C" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-  <text x="36" y="44" class="head">baseline</text>
-  <rect x="36" y="56" width="60" height="16" rx="3" fill="#C2200E"/>
-  <text x="104" y="68" class="mono dim">--accent</text>
-  <text x="36" y="94" class="mono dim">weight-display: </text><text x="150" y="94" class="mono" fill="#fff">700</text>
-  <text x="36" y="114" class="mono dim">type-display-1: </text><text x="150" y="114" class="mono" fill="#fff">clamp(3rem,7vw,5rem)</text>
-  <text x="36" y="134" class="mono dim">shadow-lifted: </text><text x="36" y="150" class="mono dim" style="font-size:9px">0 4px 16px rgba(0,0,0,0.3)</text>
-
-  <!-- arrow -->
-  <path d="M226,100 L280,100" class="arr"/>
-  <text x="238" y="92" class="mono dim" style="font-size:9px">mood apply</text>
-  <text x="236" y="115" class="mono acc" style="font-size:10px;font-weight:700">performance</text>
-
-  <!-- performance mood -->
-  <rect x="286" y="20" width="200" height="160" rx="8" fill="#12151C" stroke="#E82E11" stroke-width="1" stroke-opacity="0.4"/>
-  <text x="302" y="44" class="head">performance</text>
-  <rect x="302" y="56" width="60" height="16" rx="3" fill="#FF3A1A"/>
-  <text x="370" y="68" class="mono grn">▲ +saturation</text>
-  <text x="302" y="94" class="mono dim">weight-display: </text><text x="416" y="94" class="mono grn">900</text>
-  <text x="302" y="114" class="mono dim">type-display-1: </text><text x="302" y="130" class="mono grn" style="font-size:9px">clamp(3rem,8vw,6rem)</text>
-  <text x="302" y="152" class="mono grn" style="font-size:9px">▲ tighter, larger</text>
-
-  <!-- arrow -->
-  <path d="M492,100 L546,100" class="arr"/>
-  <text x="504" y="92" class="mono dim" style="font-size:9px">mood apply</text>
-  <text x="498" y="115" class="mono" fill="#93c5fd" style="font-size:10px;font-weight:700">minimalist-quiet</text>
-
-  <!-- minimalist -->
-  <rect x="552" y="20" width="148" height="160" rx="8" fill="#12151C" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-  <text x="568" y="44" class="head">quiet</text>
-  <rect x="568" y="56" width="60" height="16" rx="3" fill="#8B5A4A" opacity="0.7"/>
-  <text x="568" y="94" class="mono dim">weight: </text><text x="624" y="94" class="mono" fill="#93c5fd">300</text>
-  <text x="568" y="114" class="mono" fill="#93c5fd" style="font-size:9px">softer, lighter</text>
-  <text x="568" y="140" class="mono" fill="#93c5fd" style="font-size:9px">accent barely breathes</text>
-</svg>
-```
+![Mood engine — coordinated delta across tokens](assets/mood-engine.svg)
 
 One command. Zero component edits.
 
@@ -175,34 +84,7 @@ One command. Zero component edits.
 
 Sixteen tokens cover display/body sizing (fluid `clamp()`), weight scale, leading, tracking, and font-family. When a heading uses `font-[var(--weight-heading)]` and `text-[length:var(--type-display-2)]`, any mood that declares a `type-display-2` delta visibly affects every heading on the site — no component changes required.
 
-```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 220" width="700" height="220">
-  <rect width="700" height="220" fill="#12151C" rx="12"/>
-  <defs>
-    <style>
-      .mono { font: 10px/1.4 'SF Mono','Fira Code',monospace; fill: rgba(255,255,255,0.35); }
-      .tok  { font: 10px/1.4 'SF Mono','Fira Code',monospace; fill: #E82E11; }
-    </style>
-  </defs>
-
-  <!-- display-1 -->
-  <text x="32" y="68" style="font-size:52px;font-weight:900;fill:#fff;letter-spacing:-0.03em;font-family:system-ui">Transform</text>
-  <text x="32" y="86" class="tok">--type-display-1: clamp(3rem, 8vw, 6rem)</text>
-  <text x="32" y="99" class="mono">--weight-display: 900 · --track-display: -0.03em</text>
-
-  <!-- separator -->
-  <line x1="32" y1="114" x2="668" y2="114" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-
-  <!-- display-2 -->
-  <text x="32" y="148" style="font-size:28px;font-weight:700;fill:rgba(255,255,255,0.85);font-family:system-ui">Results That Last</text>
-  <text x="32" y="163" class="tok">--type-display-2: clamp(1.75rem, 4vw, 2.5rem)</text>
-  <text x="32" y="176" class="mono">--weight-heading: 700</text>
-
-  <!-- body-1 -->
-  <text x="32" y="205" style="font-size:15px;fill:rgba(255,255,255,0.6);font-family:system-ui">Every session, every meal, every metric — intentional.</text>
-  <text x="502" y="205" class="tok" style="font-size:9px">--type-body-1</text>
-</svg>
-```
+![Typography axis — 16 fluid tokens](assets/typography.svg)
 
 ---
 
@@ -454,9 +336,9 @@ tincture-css/
 
 ## Origin
 
-Tincture crystallised in April 2026 during a palette session on **Arzadon Fitness** — a Toronto personal training studio (site coming soon at [arzadonfitness.com](https://arzadonfitness.com)). After 30 commits of theme work, a single question about a secondary accent colour made the real problem clear: the *substrate* didn't model what we actually cared about. Surface-aware ink. Moods that coordinate. Tokens that know their axes.
+Tincture crystallised in April 2026 during the Next.js rebuild of [Arzadon Fitness](https://arzadonfitness.com) — a Toronto personal training studio with an existing live site being re-platformed on Next.js 15 and Tailwind v4. After 30 commits of theme work, a single question about a secondary accent colour made the real problem clear: the *substrate* didn't model what we actually cared about. Surface-aware ink. Moods that coordinate. Tokens that know their axes.
 
-The Arzadon site is the live proving ground — every mood, every surface annotation, every token in this repo runs in production there. It is not a demo project.
+The rebuilt site is the proving ground — every mood, every surface annotation, every token in this repo is running in that production build.
 
 The name comes from the tincture process: a drop of concentrated extract changes the entire pour. One mood delta, one coordinated shift.
 

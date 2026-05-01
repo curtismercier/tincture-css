@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" width="760" height="200">
+  <defs>
+    <style>
+      .label { font: 11px/1.4 'SF Mono', 'Fira Code', monospace; fill: rgba(255,255,255,0.45); }
+      .token { font: 10px/1.4 'SF Mono', 'Fira Code', monospace; fill: rgba(255,255,255,0.25); }
+      .val   { font: 13px/1.4 'SF Mono', 'Fira Code', monospace; font-weight: 600; }
+    </style>
+  </defs>
+
+  <!-- dark -->
+  <rect x="0"   y="0" width="180" height="200" rx="10" fill="#12151C"/>
+  <text x="16"  y="28" class="label">dark</text>
+  <text x="16"  y="90" class="val" fill="#FFFFFF">--ink: #FFFFFF</text>
+  <text x="16"  y="112" class="val" fill="#E82E11">--accent: #E82E11</text>
+  <text x="16"  y="134" class="token">--bg: #12151C</text>
+  <rect x="16"  y="148" width="148" height="1" fill="rgba(255,255,255,0.06)"/>
+  <text x="16"  y="170" class="token">data-surface="dark"</text>
+
+  <!-- slate -->
+  <rect x="193" y="0" width="180" height="200" rx="10" fill="#242A36"/>
+  <text x="209" y="28" class="label">slate</text>
+  <text x="209" y="90" class="val" fill="#F0EDE8">--ink: #F0EDE8</text>
+  <text x="209" y="112" class="val" fill="#E82E11">--accent: #E82E11</text>
+  <text x="209" y="134" class="token">--bg: #242A36</text>
+  <rect x="209" y="148" width="148" height="1" fill="rgba(255,255,255,0.06)"/>
+  <text x="209" y="170" class="token">data-surface="slate"</text>
+
+  <!-- steel -->
+  <rect x="386" y="0" width="180" height="200" rx="10" fill="#1C1F28"/>
+  <text x="402" y="28" class="label">steel</text>
+  <text x="402" y="90" class="val" fill="#F0EDE8">--ink: #F0EDE8</text>
+  <text x="402" y="112" class="val" fill="#E82E11">--accent: #E82E11</text>
+  <text x="402" y="134" class="token">--bg: #1C1F28</text>
+  <rect x="402" y="148" width="148" height="1" fill="rgba(255,255,255,0.06)"/>
+  <text x="402" y="170" class="token">data-surface="steel"</text>
+
+  <!-- light -->
+  <rect x="579" y="0" width="180" height="200" rx="10" fill="#F7F4F0" stroke="#E0DBD4" stroke-width="1"/>
+  <text x="595" y="28" class="label" fill="#888">light</text>
+  <text x="595" y="90" class="val" fill="#1A1612">--ink: #1A1612</text>
+  <text x="595" y="112" class="val" fill="#C2200E">--accent: #C2200E</text>
+  <text x="595" y="134" class="token" fill="#aaa">--bg: #F7F4F0</text>
+  <rect x="595" y="148" width="148" height="1" fill="rgba(0,0,0,0.06)"/>
+  <text x="595" y="170" class="token" fill="#aaa">data-surface="light"</text>
+</svg>
