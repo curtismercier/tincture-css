@@ -7,16 +7,7 @@ consumers/
 # ── Internal: development cycle history ───────────────────────────────────
 cycles/
 
-# ── Internal: project-specific CLI wrappers ───────────────────────────────
-# These contain hardcoded paths for the proving-ground project.
-# Public consumers get tincture.config.json + the generic CLI instead.
-src/cli/init.mjs
-src/cli/migrate-components.mjs
-src/cli/untangle.mjs
-src/cli/mood.mjs
-
-# ── Internal: v0.1 example registry (contains project-specific doc strings) 
-src/registry.example.json
+# ── Consumer config (project-local, never committed to tincture itself) ────
 
 # ── Internal: Arzadon-specific scripts + registry (proving-ground copies) ───
 _internal/

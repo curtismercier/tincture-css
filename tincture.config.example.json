@@ -1,8 +1,16 @@
 {
   "_comment": "Copy to tincture.config.json at your project root and customise paths.",
 
-  "registryPath": "src/tokens/registry.json",
-  "outDir":       "src/tokens/_generated",
-  "moodsDir":     "src/tokens/moods",
-  "host":         "http://localhost:3000"
+  "registryPath":      "src/tokens/registry.json",
+  "outDir":            "src/tokens/_generated",
+  "moodsDir":          "src/tokens/moods",
+
+  "globalsPath":       "src/globals.css",
+  "componentsDir":     "src/components",
+  "pagesDir":          "src/app",
+  "themeProviderPath": "src/components/ThemeProvider.tsx",
+
+  "storageKey":        "tincture-theme",
+  "brandName":         "my-brand",
+  "host":              "http://localhost:3000"
 }

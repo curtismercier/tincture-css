@@ -59,7 +59,7 @@ if (!existsSync(CACHE)) mkdirSync(CACHE, { recursive: true });
 // Build override map for the proposed state
 function buildOverrideHash({ light, dark }) {
   // Designer studio's DesignerOverrides reads `?data=<base64-json>` (per
-  // s01-91da41 fix). The shape is { root: {...}, page, section, tone }.
+  //  fix). The shape is { root: {...}, page, section, tone }.
   // We only override at root for token previews.
   const overrides = { root: {}, page: {}, section: {}, tone: {} };
   if (light) overrides.root[`--${tokenId}`] = light; // designer overrides ignore surface
