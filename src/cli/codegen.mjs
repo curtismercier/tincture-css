@@ -23,7 +23,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
+const ROOT = process.cwd(); // consumer project root
 import { REGISTRY_PATH, OUT_DIR } from './_resolve-config.mjs';
 const TINCTURE = REGISTRY_PATH.replace(/\/registry\.json$/, '');
 const GENERATED = resolve(TINCTURE, '_generated');

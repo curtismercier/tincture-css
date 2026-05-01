@@ -22,7 +22,6 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
 import { MANIFEST_PATH as MANIFEST } from './_resolve-config.mjs';
 
 const jsonOut = process.argv.includes('--json');

@@ -22,7 +22,6 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
 import { REGISTRY_PATH as REGISTRY } from './_resolve-config.mjs';
 const FOUNDATION = REGISTRY.replace('registry.json', 'foundation.css');
 

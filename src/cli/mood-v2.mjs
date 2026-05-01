@@ -32,11 +32,11 @@ import { dirname, resolve, join } from 'node:path';
 import { validateRegistry, validateMood } from '../schema.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
+const ROOT = process.cwd(); // consumer project root
 import { REGISTRY_PATH as REG_PATH, MOODS_DIR, BASELINE_PATH, OUT_DIR } from './_resolve-config.mjs';
 
 
-const CODEGEN = resolve(ROOT, 'scripts/tincture-codegen-v2.mjs');
+const CODEGEN = resolve(__dirname, 'codegen-v2.mjs'); // sibling script
 
 function loadMood(name) {
   const p = join(MOODS_DIR, `${name}.json`);

@@ -126,7 +126,7 @@ const verbs = {
     const t = m.tokens[id];
     const patterns = [`var(--${id})`, ...(t.legacy ?? []).map((l) => `var(${l})`)];
 
-    const files = walk(resolve(ROOT, 'src'), ['.tsx', '.ts', '.css']);
+    const files = walk(process.cwd(), ['.tsx', '.ts', '.css']);
     const hits = [];
     for (const file of files) {
       const content = readFileSync(file, 'utf8');
@@ -170,20 +170,20 @@ const verbs = {
     if (dark)  reg.semantic[id].darkValue = dark;
     writeFileSync(REGISTRY_PATH, JSON.stringify(reg, null, 2) + '\n', 'utf8');
     // Regen
-    execSync(`node ${resolve(__dirname, 'tincture-codegen.mjs')}`, { cwd: ROOT, stdio: 'inherit' });
+    execSync(`node ${resolve(__dirname, 'codegen.mjs')}`, { cwd: ROOT, stdio: 'inherit' });
     out(`✓ token "${id}" updated. Regenerated _generated/.`);
   },
 
   'mood list': () => {
-    // moodsDir comes from _resolve-config.mjs import
-    if (!existsSync(moodsDir)) {
+    
+    if (!existsSync(MOODS_DIR)) {
       out('no moods authored yet (cycle 12+).');
       return;
     }
-    const files = readdirSync(moodsDir).filter((f) => f.endsWith('.json'));
+    const files = readdirSync(MOODS_DIR).filter((f) => f.endsWith('.json'));
     out(`${files.length} mood preset(s):`);
     for (const f of files) {
-      const mood = JSON.parse(readFileSync(join(moodsDir, f), 'utf8'));
+      const mood = JSON.parse(readFileSync(join(MOODS_DIR, f), 'utf8'));
       out(`  ${mood.id.padEnd(20)} ${mood.doc ?? ''}`);
     }
   },
@@ -194,7 +194,7 @@ const verbs = {
   },
 
   'validate': () => {
-    execSync(`node ${resolve(__dirname, 'tincture-validate-registry.mjs')}`, { cwd: ROOT, stdio: 'inherit' });
+    execSync(`node ${resolve(__dirname, 'validate.mjs')}`, { cwd: ROOT, stdio: 'inherit' });
   },
 
   'codegen': () => {

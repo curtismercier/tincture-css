@@ -27,8 +27,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
-const CACHE = resolve(ROOT, '.tincture-cache');
+const ROOT = process.cwd();
+const CACHE = resolve(ROOT, '.tincture-cache'); // cache in consumer project
 const CDP_URL = process.env.CDP_URL || 'http://localhost:9333';
 import { HOST } from './_resolve-config.mjs';
 

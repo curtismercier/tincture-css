@@ -53,8 +53,8 @@ function arg(name, fallback) {
   return i >= 0 ? process.argv[i + 1] : fallback;
 }
 
-const IN_PATH = resolve(arg('--in', resolve(__dirname, '../registry.example.json')));
-const OUT_PATH = resolve(arg('--out', resolve(__dirname, '../registry.example.v02.json')));
+const IN_PATH = resolve(arg('--in', resolve(process.cwd(), 'registry.json')));
+const OUT_PATH = resolve(arg('--out', resolve(process.cwd(), 'registry.v02.json')));
 const BACKUP = process.argv.includes('--backup');
 const QUIET = process.argv.includes('--quiet');
 

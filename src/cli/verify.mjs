@@ -23,7 +23,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve(__dirname, '..');
+const ROOT = process.cwd(); // consumer project root — component files resolve from here
 import { REGISTRY_PATH as REGISTRY } from './_resolve-config.mjs';
 
 const update = process.argv.includes('--update');
