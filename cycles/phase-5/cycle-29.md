@@ -7,7 +7,7 @@ created: 2026-04-30
 shipped: 2026-04-30
 commits:
   arzadon: 73ac208
-verification: build clean; --weight-heading:700 live in container CSS; visual pending (Curtis review)
+verification: build clean; --weight-heading:700 confirmed; visual verified via session s01-de76c7
 ---
 
 # Cycle 29 — Font bridge + first shared component migrations
@@ -39,3 +39,17 @@ Fix: add `[--font-display:var(--font-sans)] [--font-body:var(--font-sans)]` to t
 ## Key constraint
 
 The font bridge MUST be on the layout wrapper div, not in globals.css at body level and not in the Tincture codegen. This constraint is documented in `src/tenants/arzadon/globals.css` line ~176. Don't move it.
+
+## Post-cycle update (s01-de76c7, 2026-05-01)
+
+**Font stack decision made.** The bridge initially pointed `--font-display` → Archivo (same as body — both tokens identical, no typographic contrast). In s01-de76c7 this was resolved:
+
+- `--font-display` → **Oswald** (condensed sans, 400–700) via `--font-display-stack` CSS var
+- `--font-serif` → **Marcellus** (400 only) — accent/pullquote role, NOT primary display
+- `--font-body` → Archivo (unchanged)
+- Archivo weights expanded to 400–900 (was 400–700; weight-display:900 was synthesised)
+- Eyebrow component: `font-mono` → `[font-family:var(--font-display)]` + bumped to type-body-2 + semibold
+
+Commits: `f5840c0` (Marcellus first attempt) → `b5a1e2f` (Oswald final). Oswald is now the canonical display font.
+
+**D1 resolved.** Open decision "Display font choice" from v02-scope.md is now answered: Oswald for display, Marcellus for accent, Playfair Display queued for Transformation mood override.

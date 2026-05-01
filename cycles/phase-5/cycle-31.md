@@ -22,20 +22,22 @@ are resolved.
 
 > Resolve ALL of these before writing the mood JSON or touching any code.
 
-- [ ] **D1 — Display font** — Transformation was described as "deep crimson +
-  serif headlines + generous spacing." Is a serif font in scope? If yes: which
-  font, and is it loaded in `layout.tsx` via `next/font`? (Font bridge
-  constraint: `--font-display` only resolves via the layout wrapper div —
-  see `consumers/arzadon-fitness.md`.)
+- [x] **D1 — Display font** — RESOLVED (s01-de76c7). Font stack:
+  - `--font-display` → Oswald (condensed, 400–700) — default display
+  - `--font-serif` → Marcellus (400) — accent/pullquote
+  - `--font-body` → Archivo (400–900) — body copy
+  - **Transformation mood** will override `--font-display` → Playfair Display
+    (editorial serif, weights 400–900). Playfair NOT YET LOADED in layout.tsx.
+    Must add `Playfair_Display` to next/font imports + wire as `--font-serif-display`
+    before authoring the mood delta. This is the first implementation step.
   
 - [ ] **D5 — Ordering** — Should this be cycle 31, or does clinical-v2 (the
   original v02-scope plan for this slot) come first? Curtis to decide.
 
-- [ ] **D6 — Mood reset** — Performance mood is currently applied on
-  arzadon.gravicity.io. Reset to baseline before starting:
-  `node studio/scripts/tincture-mood-v2.mjs reset`
-  Confirm: is the baseline snapshot at `tincture/registry.baseline.json` up to
-  date? (It was saved when Performance was first applied in cycle 28.)
+- [x] **D6 — Mood reset** — RESOLVED (s01-de76c7). Performance values promoted
+  to canonical baseline. `registry.baseline.json` now = Performance state.
+  `arzadon-default.json` doc updated. No reset needed — current site IS the baseline.
+  Commit: `74c3367`.
 
 - [ ] **Bug fix first** — Three `data-tone="*"` specificity bugs remain live
   (prose, surface, brand-band — same shape as the feature bug fixed in

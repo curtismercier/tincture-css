@@ -51,3 +51,13 @@ verification: build clean (smoke passed); scanner: 408 heading-context → 1 rem
 ## Visual delta
 
 Fluid `clamp()` replaces stepped Tailwind breakpoints. Headings are slightly larger at desktop (up to 3.75rem instead of 3rem for h2). Leading is 1.0 on all headings (was 1.05 on some). Both are improvements. Moods can now override ALL heading sizes, weights, and font-family from a single delta.
+
+## Post-cycle update (s01-de76c7, 2026-05-01)
+
+**`--font-display` resolved to Oswald** — so all `[font-family:var(--font-display)]` added by this sweep now render as Oswald condensed. When cycle 30 shipped, the bridge pointed to Archivo (flat). The visual result looks substantially different now (condensed, athletic headings vs wide geometric).
+
+**Hero h1 pulled back**: `--type-display-1` reduced from `clamp(3rem, 8vw, 6rem)` (Performance-inflated) to `clamp(2.5rem, 6.5vw, 4.75rem)`. Commits: `9155442`.
+
+**`--type-lead` added**: new token `1.25rem` for hero sub-header paragraphs. 27 pages updated from hardcoded `text-lg/xl` to `text-[length:var(--type-lead)] font-medium`. Bridges the gap between h1 and body copy.
+
+**One regression found**: headings that had manual `font-serif` before this sweep got `[font-family:var(--font-display)]` added on top — specificity fight. Resolved by aligning `--font-display` with the intended serif accent direction, then switching to Oswald which had no conflict. See cycle-29 post-cycle note.
