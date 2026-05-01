@@ -1,22 +1,46 @@
 ---
 id: cycle-25
 phase: 5
-title: Add spacing axis (tone-aware)
-status: queued
+title: Surface scanner + auto-fill codegen (plan deviation from "spacing axis")
+status: done
 created: 2026-04-30
-parent_doc: ../v02-scope.md
+shipped: 2026-04-30
+commits:
+  tincture-css: fe10d6e + b747bee
+  arzadon: f682cb6 (scanner bug fixes)
+note: >
+  Original plan said "Add spacing axis." Session pivoted to surface scanner
+  + auto-fill codegen fix because the cascade-reset bug was critical and the
+  surface annotation gap was causing visible rendering bugs.
+verification: scanner: 4 real findings, 1 false-positive; cascade reset verified via CDP
 ---
 
-# Cycle 25 — Add spacing axis (tone-aware)
+# Cycle 25 — Surface scanner + auto-fill codegen
 
-## Status
-**queued.** Spec lives in `cycles/v02-scope.md` (cycle table row 25).
+## What shipped (instead of spacing axis)
 
-## Discipline reminders (from v0.1 audit)
-- One commit, one verifiable outcome
-- Visual mosaic required before "done"
-- Sweep audit globals.css/page.tsx for specificity overrides BEFORE migrating tokens
-- CDP eval against live = the real acceptance test
+**`src/cli/scan-surfaces.mjs`** — build-time scanner:
+- Finds JSX sections with dark-bg patterns missing `data-surface="dark"` annotation
+- Patterns: `bg-black/N`, `<Image fill>` + dark overlay, `data-tone="feature|brand-band"`, `bg-[var(--bg-dark*)]`
+- Outputs file:line, pattern matched, suggested fix
+- `--check` mode exits 1 for CI
 
-## Open from v0.1
-See cycles/audits/2026-04-30-cycle-1-20-audit.md and cycles/audits/2026-04-30-architecture-pivot.md.
+**Codegen auto-fill fix** (critical):
+- Codegen-v2 now emits reset cells for EVERY axis-value of EVERY axis a token declares
+- Without this, `[data-surface="light"]` nested inside `[data-surface="dark"]` couldn't reset `--ink` back to dark slate
+- This was the root cause of the megamenu white-on-white bug
+
+## Why the plan deviated
+
+The original "spacing axis" plan would have added `--space-section`, `--space-rhythm` etc. tokens. But the surface scanner was blocking correct rendering on existing pages — cascade reset was broken and causing visible layout bugs. Unblocking correct token resolution was higher priority than adding new spacing tokens.
+
+**Spacing axis is now deferred to phase 6.** See cycle-34.md for the plan.
+
+## Surface scanner findings (arzadon initial run)
+
+| Finding | Root cause | Fix |
+|---|---|---|
+| Megamenu panel white-on-white | `bg-white` + no `data-surface` | `data-surface="light"` on panel |
+| Navbar pill text invisible | `bg-black` pill inheriting dark ink | `data-surface="dark"` on pill |
+| Header turning white | legacy `data-theme="light"` | `data-surface="light"` on `<header>` |
+| 3 more sections | image-overlay + dark-band patterns | Sweep via scanner output |
