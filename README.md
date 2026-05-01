@@ -5,7 +5,7 @@
 A surface-aware, multi-axis design substrate for AI-mediated theming. One mood delta shifts an entire visual identity — typography, color, spacing, shadows, radius — coordinated across every surface simultaneously.
 
 **Version:** 0.2.2 · **Status:** Active  
-**Origin:** Built during the Next.js rebuild of [Arzadon Fitness](https://arzadonfitness.com), a Toronto personal training studio. Extracted as a standalone substrate.
+**Origin:** Built for [Arzadon Fitness](https://arzadonfitness.com)'s new site — coming soon. Extracted as a standalone substrate.
 
 ---
 
@@ -336,9 +336,9 @@ tincture-css/
 
 ## Origin
 
-Tincture crystallised in April 2026 during the Next.js rebuild of [Arzadon Fitness](https://arzadonfitness.com) — a Toronto personal training studio with an existing live site being re-platformed on Next.js 15 and Tailwind v4. After 30 commits of theme work, a single question about a secondary accent colour made the real problem clear: the *substrate* didn't model what we actually cared about. Surface-aware ink. Moods that coordinate. Tokens that know their axes.
+Tincture crystallised in April 2026 while building the new [Arzadon Fitness](https://arzadonfitness.com) site — a Toronto personal training studio. After 30 commits of theme work, a single question about a secondary accent colour made the real problem clear: the *substrate* didn't model what we actually cared about. Surface-aware ink. Moods that coordinate. Tokens that know their axes.
 
-The rebuilt site is the proving ground — every mood, every surface annotation, every token in this repo is running in that production build.
+Every mood, surface annotation, and token in this repo runs in that build. The new site is coming soon.
 
 The name comes from the tincture process: a drop of concentrated extract changes the entire pour. One mood delta, one coordinated shift.
 
