@@ -1,5 +1,40 @@
+# ── Dependencies ──────────────────────────────────────────────────────────
 node_modules/
-.tincture-cache/
+
+# ── Internal: consumer integrations (project-specific) ────────────────────
+consumers/
+
+# ── Internal: development cycle history ───────────────────────────────────
+cycles/
+
+# ── Internal: project-specific CLI wrappers ───────────────────────────────
+# These contain hardcoded paths for the proving-ground project.
+# Public consumers get tincture.config.json + the generic CLI instead.
+src/cli/init.mjs
+src/cli/migrate-components.mjs
+src/cli/untangle.mjs
+src/cli/mood.mjs
+
+# ── Internal: v0.1 example registry (contains project-specific doc strings) 
+src/registry.example.json
+
+# ── Internal: Arzadon-specific scripts + registry (proving-ground copies) ───
+_internal/
+
+# ── Consumer config (project-local, never committed to tincture itself) ────
+tincture.config.json
+tincture.config.local.json
+
+# ── Build artefacts ────────────────────────────────────────────────────────
+# _generated/ contains codegen output that references consumer project paths.
+# The source files (foundation.css, schema.mjs) are what's public.
+src/_generated/
+src/_generated-v2/
+dist/
+*.tgz
+
+# ── OS / editor ───────────────────────────────────────────────────────────
 .DS_Store
-*.log
 .env
+.env.local
+*.log

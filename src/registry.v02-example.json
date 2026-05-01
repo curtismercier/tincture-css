@@ -135,7 +135,7 @@
       "kind": "brand-lock",
       "axes": [],
       "locked": true,
-      "doc": "Arzadon wordmark red. Immutable — moods cannot override.",
+      "doc": "Brand primary mark. Immutable — moods cannot override.",
       "values": {
         "default": "#EF4123"
       }

@@ -169,7 +169,7 @@ export type Primitives = Record<string, Record<string, PrimitiveDefinition>>;
 export interface Registry {
   /** Schema version. v0.2.x = multi-axis. */
   version: string;
-  /** Friendly name (e.g. "arzadon-fitness/tincture"). */
+  /** Friendly name (e.g. "my-brand/tincture"). */
   name?: string;
   /** Free-text description. */
   doc?: string;

@@ -30,8 +30,8 @@ import { dirname, resolve, join } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
-const REGISTRY_PATH = resolve(ROOT, 'src/tenants/arzadon/tincture/registry.json');
-const MANIFEST_PATH = resolve(ROOT, 'src/tenants/arzadon/tincture/_generated/manifest.json');
+import { REGISTRY_PATH, MANIFEST_PATH, MOODS_DIR } from './_resolve-config.mjs';
+
 
 const args = process.argv.slice(2);
 const jsonOut = args.includes('--json');
@@ -175,7 +175,7 @@ const verbs = {
   },
 
   'mood list': () => {
-    const moodsDir = resolve(ROOT, 'src/tenants/arzadon/tincture/moods');
+    // moodsDir comes from _resolve-config.mjs import
     if (!existsSync(moodsDir)) {
       out('no moods authored yet (cycle 12+).');
       return;

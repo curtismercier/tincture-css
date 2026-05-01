@@ -2,16 +2,43 @@
   "id": "luxurious-refined",
   "name": "Luxurious Refined",
   "doc": "Italic serif headlines (handled at typography layer). Champagne accents on slate. Long velvet shadows. Reads like a Robb Report editorial.",
-  "base": "arzadon-default",
+  "base": "default",
   "tokens": {
-    "accent":      { "lightValue": "#B8860B", "darkValue": "#E8C566" },
-    "accent-warm": { "lightValue": "#B8860B", "darkValue": "#E8C566" },
-    "accent-fg":   { "lightValue": "#1A1612", "darkValue": "#1A1612" },
-    "ink":         { "lightValue": "#1A1612", "darkValue": "#F0EBDC" },
-    "ink-soft":    { "lightValue": "#5C5347", "darkValue": "#C8BDA8" },
-    "bg":          { "lightValue": "#F8F4EC", "darkValue": "#0E0B07" },
-    "bg-card":     { "lightValue": "#FCF9F2", "darkValue": "#1B160F" },
-    "bg-elev":     { "lightValue": "#F0E9D8", "darkValue": "#2A2218" }
+    "accent": {
+      "lightValue": "#B8860B",
+      "darkValue": "#E8C566"
+    },
+    "accent-warm": {
+      "lightValue": "#B8860B",
+      "darkValue": "#E8C566"
+    },
+    "accent-fg": {
+      "lightValue": "#1A1612",
+      "darkValue": "#1A1612"
+    },
+    "ink": {
+      "lightValue": "#1A1612",
+      "darkValue": "#F0EBDC"
+    },
+    "ink-soft": {
+      "lightValue": "#5C5347",
+      "darkValue": "#C8BDA8"
+    },
+    "bg": {
+      "lightValue": "#F8F4EC",
+      "darkValue": "#0E0B07"
+    },
+    "bg-card": {
+      "lightValue": "#FCF9F2",
+      "darkValue": "#1B160F"
+    },
+    "bg-elev": {
+      "lightValue": "#F0E9D8",
+      "darkValue": "#2A2218"
+    }
   },
-  "axis-defaults": { "surface": "light", "flavor": "warm" }
+  "axis-defaults": {
+    "surface": "light",
+    "flavor": "warm"
+  }
 }

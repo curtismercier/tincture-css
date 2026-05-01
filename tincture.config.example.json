@@ -1,0 +1,8 @@
+{
+  "_comment": "Copy to tincture.config.json at your project root and customise paths.",
+
+  "registryPath": "src/tokens/registry.json",
+  "outDir":       "src/tokens/_generated",
+  "moodsDir":     "src/tokens/moods",
+  "host":         "http://localhost:3000"
+}

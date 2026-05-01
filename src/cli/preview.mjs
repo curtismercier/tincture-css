@@ -30,7 +30,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
 const CACHE = resolve(ROOT, '.tincture-cache');
 const CDP_URL = process.env.CDP_URL || 'http://localhost:9333';
-const HOST = process.env.STUDIO_HOST || 'arzadon.gravicity.io';
+import { HOST } from './_resolve-config.mjs';
 
 const args = process.argv.slice(2);
 const tokenId = args[0];

@@ -20,7 +20,7 @@
  *   tincture-mood-v2 list
  *   tincture-mood-v2 preview <name>      — show diff vs current registry
  *   tincture-mood-v2 apply <name>        — write changes to registry + regen
- *   tincture-mood-v2 reset               — restore baseline (arzadon-default)
+ *   tincture-mood-v2 reset               — restore baseline (default)
  *
  * Cycle 26.
  */
@@ -33,9 +33,9 @@ import { validateRegistry, validateMood } from '../schema.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
-const REG_PATH = resolve(ROOT, 'src/tenants/arzadon/tincture/registry.json');
-const MOODS_DIR = resolve(ROOT, 'src/tenants/arzadon/tincture/moods');
-const BASELINE_PATH = resolve(ROOT, 'src/tenants/arzadon/tincture/registry.baseline.json');
+import { REGISTRY_PATH as REG_PATH, MOODS_DIR, BASELINE_PATH, OUT_DIR } from './_resolve-config.mjs';
+
+
 const CODEGEN = resolve(ROOT, 'scripts/tincture-codegen-v2.mjs');
 
 function loadMood(name) {
@@ -126,7 +126,7 @@ else if (verb === 'preview' || verb === 'apply') {
     
     writeFileSync(REG_PATH, JSON.stringify(reg, null, 2) + '\n');
     console.log(`✓ applied to registry. Regenerating CSS...`);
-    execSync(`node ${CODEGEN} --registry ${REG_PATH} --out ${resolve(ROOT, 'src/tenants/arzadon/tincture/_generated')} --quiet`, { stdio: 'inherit' });
+    execSync(`node ${CODEGEN} --registry ${REG_PATH} --out ${OUT_DIR} --quiet`, { stdio: 'inherit' });
     console.log(`✓ done. Run pnpm build to verify.`);
   }
 }
@@ -136,7 +136,7 @@ else if (verb === 'reset') {
     process.exit(1);
   }
   copyFileSync(BASELINE_PATH, REG_PATH);
-  execSync(`node ${CODEGEN} --registry ${REG_PATH} --out ${resolve(ROOT, 'src/tenants/arzadon/tincture/_generated')} --quiet`, { stdio: 'inherit' });
+  execSync(`node ${CODEGEN} --registry ${REG_PATH} --out ${OUT_DIR} --quiet`, { stdio: 'inherit' });
   console.log(`✓ reset to baseline. CSS regenerated.`);
 }
 else {

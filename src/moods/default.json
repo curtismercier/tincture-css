@@ -1,0 +1,11 @@
+{
+  "id": "default",
+  "name": "Default",
+  "doc": "Default brand palette. All other moods are deltas from this. Crimson accent on light surface, vivid red-orange on dark. Cool slate / warm parchment base.",
+  "base": null,
+  "tokens": {},
+  "axis-defaults": {
+    "surface": "light",
+    "flavor": "warm"
+  }
+}

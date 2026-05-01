@@ -2,16 +2,43 @@
   "id": "editorial-warm",
   "name": "Editorial Warm",
   "doc": "Magazine-feature warmth. Soft parchment, terracotta accents, generous breathing room. Reads like a Sunday New York Times Magazine spread.",
-  "base": "arzadon-default",
+  "base": "default",
   "tokens": {
-    "accent":      { "lightValue": "#A53D2B", "darkValue": "#D86A47" },
-    "accent-warm": { "lightValue": "#A53D2B", "darkValue": "#D86A47" },
-    "ink":         { "lightValue": "#1A1612", "darkValue": "#F4EFE8" },
-    "ink-soft":    { "lightValue": "#5C5247", "darkValue": "#C8BFB1" },
-    "bg":          { "lightValue": "#F4EDE2", "darkValue": "#1F1812" },
-    "bg-card":     { "lightValue": "#FBF7F0", "darkValue": "#2A211A" },
-    "bg-elev":     { "lightValue": "#EFE6D7", "darkValue": "#33291F" },
-    "border":      { "lightValue": "rgba(48, 30, 20, 0.10)", "darkValue": "rgba(216, 106, 71, 0.16)" }
+    "accent": {
+      "lightValue": "#A53D2B",
+      "darkValue": "#D86A47"
+    },
+    "accent-warm": {
+      "lightValue": "#A53D2B",
+      "darkValue": "#D86A47"
+    },
+    "ink": {
+      "lightValue": "#1A1612",
+      "darkValue": "#F4EFE8"
+    },
+    "ink-soft": {
+      "lightValue": "#5C5247",
+      "darkValue": "#C8BFB1"
+    },
+    "bg": {
+      "lightValue": "#F4EDE2",
+      "darkValue": "#1F1812"
+    },
+    "bg-card": {
+      "lightValue": "#FBF7F0",
+      "darkValue": "#2A211A"
+    },
+    "bg-elev": {
+      "lightValue": "#EFE6D7",
+      "darkValue": "#33291F"
+    },
+    "border": {
+      "lightValue": "rgba(48, 30, 20, 0.10)",
+      "darkValue": "rgba(216, 106, 71, 0.16)"
+    }
   },
-  "axis-defaults": { "surface": "light", "flavor": "ember" }
+  "axis-defaults": {
+    "surface": "light",
+    "flavor": "ember"
+  }
 }

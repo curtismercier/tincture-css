@@ -23,8 +23,9 @@ import { dirname, resolve } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
-const REGISTRY = resolve(ROOT, 'src/tenants/arzadon/tincture/registry.json');
-const FOUNDATION = resolve(ROOT, 'src/tenants/arzadon/tincture/foundation.css');
+import { REGISTRY_PATH as REGISTRY } from './_resolve-config.mjs';
+const FOUNDATION = REGISTRY.replace('registry.json', 'foundation.css');
+
 
 const verbose = process.argv.includes('--verbose');
 const errors = [];

@@ -4,7 +4,7 @@ A mood is a coordinated delta across multiple tokens. One command shifts the who
 
 ## Built-in moods
 
-- **arzadon-default** — baseline (the seed palette)
+- **default** — baseline (the seed palette)
 - **clinical** — cool blue + tighter spacing + sharper radius
 - **editorial-warm** — terracotta + parchment + softer
 - **aggressive-bold** — pure black/white + neon red + tight
@@ -28,7 +28,7 @@ Drop a JSON file in `tincture/moods/<name>.json`:
   "id": "my-mood",
   "name": "My Mood",
   "doc": "What this mood feels like, what it's for.",
-  "base": "arzadon-default",
+  "base": "default",
   "tokens": {
     "accent": { "lightValue": "#1F75FE", "darkValue": "#5BA8FF" },
     "ink":    { "lightValue": "#0A0A0A", "darkValue": "#FAFAFA" }

@@ -42,7 +42,7 @@ flips it automatically.
 ```bash
 npx tincture mood apply clinical
 # All accent + ink + bg tokens shift to clinical-blue palette.
-# Reverse with: npx tincture mood apply arzadon-default
+# Reverse with: npx tincture mood apply default
 ```
 
 ## Verbs

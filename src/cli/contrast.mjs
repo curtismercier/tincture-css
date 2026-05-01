@@ -23,7 +23,7 @@ import { dirname, resolve } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
-const MANIFEST = resolve(ROOT, 'src/tenants/arzadon/tincture/_generated/manifest.json');
+import { MANIFEST_PATH as MANIFEST } from './_resolve-config.mjs';
 
 const jsonOut = process.argv.includes('--json');
 const verbose = process.argv.includes('--verbose');

@@ -24,7 +24,8 @@ import { dirname, resolve } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
-const TINCTURE = resolve(ROOT, 'src/tenants/arzadon/tincture');
+import { REGISTRY_PATH, OUT_DIR } from './_resolve-config.mjs';
+const TINCTURE = REGISTRY_PATH.replace(/\/registry\.json$/, '');
 const GENERATED = resolve(TINCTURE, '_generated');
 const REGISTRY = resolve(TINCTURE, 'registry.json');
 
