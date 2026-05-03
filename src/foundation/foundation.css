@@ -25,10 +25,43 @@
 }
 
 /* ── Surface declarations ──
-   data-surface=dark : flip color-scheme to dark, regardless of [data-theme=*]
-   data-surface=light : force color-scheme back to light (rare; nested override) */
+   data-surface=dark  : flip color-scheme to dark, regardless of [data-theme=*]
+   data-surface=light : force color-scheme back to light (nested override)
+   data-surface=slate : mid-dark section break — visually lighter than dark,
+                        used between dark content blocks (table stakes: sidebars,
+                        pricing bands, ClientResults). bg ~#242A36.
+   data-surface=steel : anodized data surface — calculators, data grids,
+                        interactive/instrument surfaces. bg ~#1C1F28.
+                        Use steel-card / zone-card utilities inside this surface.
+
+   Slate and steel are both dark color-scheme — ink, accent, border tokens all
+   inherit dark-side values from light-dark() above. Only bg/bg-card/bg-elev
+   need explicit overrides (they are lighter than the dark base). */
 [data-surface="dark"]  { color-scheme: dark; }
 [data-surface="light"] { color-scheme: light; }
+[data-surface="slate"] { color-scheme: dark; }
+[data-surface="steel"] { color-scheme: dark; }
+
+/* Slate — mid-dark section break (~#242A36 on a dark-palette site).
+   Consumer sets exact bg hex to match their dark palette's midpoint.
+   All ink/accent/border tokens resolve from the dark side of light-dark(). */
+[data-surface="slate"] {
+  /* bg tokens override only — no ink/accent redeclaration needed */
+  /* Consumer example (Arzadon):
+     --bg:      #242A36;
+     --bg-card: #2C3342;
+     --bg-elev: #303748; */
+}
+
+/* Steel — anodized/instrument surface (~#1C1F28 on a dark-palette site).
+   Sits between dark (#12151C) and slate (#242A36) — precision feel.
+   Companion utilities: .steel-card (raised tile + red glow), .zone-card. */
+[data-surface="steel"] {
+  /* Consumer example (Arzadon):
+     --bg:      #1C1F28;
+     --bg-card: #24262F;
+     --bg-elev: #2C2E3A; */
+}
 
 /* ── Core tokens (pair = light value, dark value) ──
    These resolve based on the closest ancestor with a color-scheme

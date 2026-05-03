@@ -9,6 +9,31 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- `src/foundation/foundation.css` — `slate` and `steel` surface declarations.
+  `slate` (#242A36-range) for section breaks between dark content blocks;
+  `steel` (#1C1F28-range) for calculators and data-heavy interactive surfaces.
+  Both set `color-scheme: dark` — ink/accent/border tokens inherit dark-side
+  values; only bg/bg-card/bg-elev need consumer overrides.
+- `docs/architecture/light-variants.md` — light theme variant pattern.
+  Documents Mist/Whisper/Slate Ghost cool-grey palette variants, compound
+  CSS selector approach (`[data-theme="X"][data-surface="light"]`), ink colour
+  shifts for cool backgrounds, and ThemeProvider wiring.
+- `docs/architecture/theme-surface-pattern.md` — ThemeSurface component pattern.
+  Solves the server-component/client-theme gap in Next.js (and similar SSR
+  frameworks): minimal client wrapper that applies `data-surface` at runtime
+  while all children stay server-rendered. Includes when-to-use decision table.
+- `tools/tincture-lint.mjs` — static surface-correctness auditor ported from
+  Arzadon Fitness production build. Reads consumer config from `tincture.config.json`.
+  Rules: `raw-hex-section` (CRITICAL), `legacy-token`/`surface-mismatch` (HIGH),
+  `bare-section` (MEDIUM). Score: `100 - (critical×15) - (high×5) - (medium×1)`.
+  Flags: `--check` (exit 1 on C/H), `--no-demos`, `--json`.
+  Dynamic `data-surface={...}` expressions recognised as valid.
+
+### Changed
+- `src/foundation/foundation.css` — `[data-surface]` comment block expanded with
+  slate and steel use-case descriptions.
+
 ---
 
 ## [0.2.2] — 2026-05-01
