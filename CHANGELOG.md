@@ -29,6 +29,19 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `bare-section` (MEDIUM). Score: `100 - (critical×15) - (high×5) - (medium×1)`.
   Flags: `--check` (exit 1 on C/H), `--no-demos`, `--json`.
   Dynamic `data-surface={...}` expressions recognised as valid.
+
+### Added (continued — 2026-05-03)
+- `docs/architecture/surface-extensions-pattern.md` — the mood bridge pattern.
+  How to create a `surface-extensions.css` that re-declares surface tokens as
+  `var(--mood-TOKEN, fallback)` so mood overrides cascade through `data-surface`
+  blocks. Covers: import order, which tokens need passthrough vs which inherit
+  freely, adding surfaces outside the codegen, updating mood generators to emit
+  `--mood-*` keys. Root insight: generated CSS gets clobbered by same-specificity
+  hand-written rules later in the cascade — `surface-extensions.css` must be the
+  LAST import for its overrides to win.
+- `tools/tincture-lint.mjs` — added `--mood-border` / `--mood-border-soft` to
+  the MOOD_PASSTHROUGH set documentation (border tone is mood-relevant).
+
   `tincture-lint-ignore` directive: add `// tincture-lint-ignore` or
   `{/* tincture-lint-ignore */}` on the line before any intentional exception
   (demo chrome, semantic status colours, string literals in data arrays).
