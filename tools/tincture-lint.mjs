@@ -152,6 +152,9 @@ for (const file of files) {
 
   lines.forEach((line, i) => {
     const lineNo = i + 1;
+    // Skip lines marked with tincture-lint-ignore (or the line immediately after a comment)
+    const prevLine = i > 0 ? lines[i - 1] : '';
+    if (/tincture-lint-ignore/.test(line) || /tincture-lint-ignore/.test(prevLine)) return;
 
     // Rule: legacy-token — --color-bg-accent-band anywhere
     if (LEGACY_TOKEN_RE.test(line)) {

@@ -29,6 +29,9 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `bare-section` (MEDIUM). Score: `100 - (critical×15) - (high×5) - (medium×1)`.
   Flags: `--check` (exit 1 on C/H), `--no-demos`, `--json`.
   Dynamic `data-surface={...}` expressions recognised as valid.
+  `tincture-lint-ignore` directive: add `// tincture-lint-ignore` or
+  `{/* tincture-lint-ignore */}` on the line before any intentional exception
+  (demo chrome, semantic status colours, string literals in data arrays).
 
 ### Changed
 - `src/foundation/foundation.css` — `[data-surface]` comment block expanded with
