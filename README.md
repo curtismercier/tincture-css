@@ -113,6 +113,40 @@ $ tincture mood apply my-experimental-mood
 
 ---
 
+### Per-page moods
+
+The same `--mood-*` indirection that powers a site-wide swap also activates
+a mood on **any wrapper element** in the DOM. One person, one product, one
+special route gets its own character — navbar and footer included — without
+forking pages or duplicating CSS.
+
+```html
+<!-- Whole site renders in default mood — brand red, Oswald -->
+<div class="layout">
+  <Navbar />
+
+  <!-- This subtree picks up champagne accents + DM Serif headlines.
+       Cascade re-resolves under [data-mood="..."] for every nested
+       data-surface=dark/light block. -->
+  <main data-mood="jennifer-editorial">
+    {children}
+  </main>
+
+  <Footer />
+</div>
+```
+
+Mood file is a sparse JSON — only the tokens you actually want different
+from the surrounding default. The discipline is *partial-token override*,
+not full-palette swap; the page should still belong to the surrounding
+identity, with the mood as a deliberate signal layer.
+
+[→ docs/architecture/per-page-moods.md](./docs/architecture/per-page-moods.md)
+· [→ src/moods/per-page-example.json](./src/moods/per-page-example.json)
+· First production consumer: [Arzadon Fitness](./consumers/arzadon-fitness.md) (`/about/jennifer-arzadon`)
+
+---
+
 ### Surface scanner
 
 A build-time scanner flags dark-background sections without surface annotations before they ship:

@@ -1,0 +1,21 @@
+{
+  "id": "per-page-example",
+  "name": "Per-Page Example (template)",
+  "doc": "Template for a per-page mood. Activate via [data-mood=\"per-page-example\"] on any wrapper element rather than via the registry-level CLI. Cascades through every data-surface block in the wrapper subtree — page content, navbar, footer if they're inside the wrapper. See docs/architecture/per-page-moods.md for the full pattern.",
+  "base": "default",
+  "tokens": {
+    "accent":      { "lightValue": "#B8860B", "darkValue": "#E8C566" },
+    "accent-warm": { "lightValue": "#B8860B", "darkValue": "#E8C566" },
+    "accent-fg":   { "lightValue": "#1A1612", "darkValue": "#1A1612" },
+    "font-display":{ "lightValue": "var(--font-dm-serif)", "darkValue": "var(--font-dm-serif)" }
+  },
+  "axis-defaults": { "surface": "dark", "flavor": "warm" },
+  "active-tokens":  ["accent", "accent-warm", "accent-fg", "font-display"],
+  "shelved-tokens": ["ink", "ink-soft", "bg", "bg-card", "bg-elev", "border", "border-soft"],
+  "notes": [
+    "PARTIAL TOKEN DISCIPLINE: this template only overrides accent + font. Background, ink, cards, borders stay brand-default so the page still belongs to the surrounding visual identity.",
+    "Activation: add data-mood=\"per-page-example\" to any wrapper element (route layout, page component, or single section).",
+    "If you find yourself overriding --bg or --ink on a per-page mood, ask twice — those are usually the foundation that holds the page on the rest of the site.",
+    "Brand-locked tokens (--brand-mark-primary, --brand-mark-secondary) cannot be overridden. Per-page logo variants ship as asset swaps (different SVG file when the path matches), not as token overrides."
+  ]
+}

@@ -10,6 +10,24 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Added
+- **Per-page moods** — documented and tooled. The same `--mood-*` indirection
+  layer that powers site-wide moods also activates a mood on any DOM wrapper
+  via `data-mood="X"`. Cascades through nested data-surface blocks (page +
+  navbar + footer if they're under the wrapper). No CLI invocation, no
+  registry mutation — the mood JSON ships in the bundle and the framework
+  sets the attribute when the route matches.
+  - `docs/architecture/per-page-moods.md` — full pattern, activation strategies
+    (Next.js layout / page component / per-section), partial-token discipline,
+    common pitfalls.
+  - `src/moods/per-page-example.json` — minimal 4-token template demonstrating
+    partial-token override (accent + accent-warm + accent-fg + font-display).
+  - README + `docs/MOODS.md` — sections added pointing at the new docs.
+  - First production consumer: [Arzadon Fitness](consumers/arzadon-fitness.md)'s
+    `jennifer-editorial` mood on `/about/jennifer-arzadon`. Validates the
+    pattern in production: champagne accents + DM Serif Display cascading
+    through navbar, page, and footer simultaneously, with everything
+    outside that route untouched.
+
 - `src/foundation/foundation.css` — `slate` and `steel` surface declarations.
   `slate` (#242A36-range) for section breaks between dark content blocks;
   `steel` (#1C1F28-range) for calculators and data-heavy interactive surfaces.

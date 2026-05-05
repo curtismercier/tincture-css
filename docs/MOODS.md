@@ -44,3 +44,39 @@ Then `npx tincture mood apply my-mood`.
 ```bash
 npx tincture mood diff clinical editorial-warm
 ```
+
+## Per-page activation (no CLI, runtime)
+
+The CLI applies a mood site-wide by mutating the registry. There's a second
+mode: activate a mood on **any wrapper element** at runtime via a
+`data-mood` attribute. This is how you give one route, one persona, or one
+feature card its own character without touching the rest of the site.
+
+```html
+<main data-mood="jennifer-editorial">
+  <!-- This subtree resolves --accent, --font-display, etc. from
+       jennifer-editorial. Everything outside stays default. -->
+</main>
+```
+
+A per-page mood is the same JSON shape, but with two important differences
+from a site-wide mood:
+
+1. **Sparse tokens.** Override only what you actually want different from
+   the surrounding default. A 12-token mood on a single route reads as
+   *"why is this page on a different website?"* A 3- or 4-token mood reads
+   as *a deliberate signal layer.*
+
+2. **No CLI invocation.** The mood file ships in your bundle, the
+   `[data-mood="X"]` block ships in `surface-extensions.css`, the attribute
+   gets set by your framework when the route matches.
+
+Full pattern (Next.js layout, partial-token discipline, activation
+strategies, common pitfalls): [`docs/architecture/per-page-moods.md`](./architecture/per-page-moods.md).
+
+Template: [`src/moods/per-page-example.json`](../src/moods/per-page-example.json).
+
+First production consumer: Arzadon Fitness's `jennifer-editorial` on
+`/about/jennifer-arzadon` — swaps brand red for champagne gold + Oswald for
+DM Serif Display, cascading through navbar, page, and footer simultaneously.
+See [`consumers/arzadon-fitness.md`](../consumers/arzadon-fitness.md).
