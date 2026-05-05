@@ -10,17 +10,39 @@
 ## Layers
 
 ```
-Mood preset       — coordinated delta across many tokens
+Mood preset           — coordinated delta across many tokens
     │
     ▼
-Registry          — typed tokens with semantic metadata
+Registry              — typed tokens with semantic metadata
     │
     ▼
-Semantic tokens   — light-dark() pairs
+Semantic tokens       — light-dark() pairs
     │
     ▼
-Primitives        — raw values (never edited at runtime)
+Primitives            — raw values (never edited at runtime)
 ```
+
+## Two activation modes
+
+Moods activate in two distinct modes, both powered by the same `--mood-*`
+indirection layer in `surface-extensions.css`:
+
+```
+Site-wide     — tincture mood apply X    (CLI → registry → codegen → rebuild)
+                Whole-site identity flip. Good for rebrands, A/B tests,
+                seasonal campaigns. Mood becomes the new default everywhere.
+
+Per-page      — [data-mood="X"] on a DOM wrapper    (runtime cascade)
+                Mood activates for that subtree only — page, navbar, and
+                footer if they're inside the wrapper. No CLI, no registry
+                mutation. The mood JSON ships in the bundle; the framework
+                sets the attribute when the route matches.
+```
+
+The mood JSON shape is identical for both modes. The discipline differs:
+site-wide moods are usually full palettes (every token shifts together);
+per-page moods are usually sparse (3–4 tokens — accent + font — with the
+rest staying brand-default). See [`docs/architecture/per-page-moods.md`](./architecture/per-page-moods.md).
 
 ## Why not just shadcn/Tweakcn?
 

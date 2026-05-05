@@ -45,6 +45,27 @@ npx tincture mood apply clinical
 # Reverse with: npx tincture mood apply default
 ```
 
+## Per-page mood (no CLI, runtime)
+
+The CLI mode above is whole-site. There's a second mode for activating a
+mood on a single route or section — add `[data-mood="X"]` to any wrapper
+element. The cascade reaches every descendant including navbar and footer
+if they're inside the wrapper.
+
+```tsx
+// Next.js layout — reaches navbar + page + footer
+<div data-mood={pathname === '/about/jennifer' ? 'jennifer-editorial' : undefined}>
+  <Navbar />
+  <main>{children}</main>
+  <Footer />
+</div>
+```
+
+Author sparse moods for this mode — only override the tokens you actually
+want different from the surrounding default. Full pattern + activation
+strategies + partial-token discipline:
+[`docs/architecture/per-page-moods.md`](./architecture/per-page-moods.md).
+
 ## Verbs
 
 ```bash

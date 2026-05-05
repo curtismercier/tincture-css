@@ -57,6 +57,18 @@ Emits:
 It patches multiple tokens at once. Apply a mood → every consumer token that
 the mood touches shifts together. One command, no component edits.
 
+Moods activate in two distinct modes:
+- **Site-wide** (registry / CLI) — `tincture mood apply X` writes the delta to
+  `registry.json` and re-runs codegen. Whole-site rebrand.
+- **Per-page** (runtime / DOM attribute) — `[data-mood="X"]` on any wrapper
+  element activates the mood for that subtree only. Cascades through nested
+  data-surface blocks (incl. navbar + footer if they're under the wrapper).
+  No registry mutation, no rebuild. The mood JSON ships in the bundle and
+  the framework sets the attribute when the route matches.
+
+Use site-wide for whole-site identity flips and A/B tests; use per-page for
+signature pages, single-persona flavours, and feature-card demonstrations.
+
 **3. `data-surface` is the annotation.**
 Every section/wrapper with a dark background needs `data-surface="dark"`.
 Tincture's scanner flags missing annotations before deploy. Without the
@@ -210,6 +222,72 @@ Only declare tokens you want to shift. Everything else inherits from `base`.
 
 ---
 
+## Per-page moods (runtime, no CLI)
+
+The same `--mood-*` indirection that powers a site-wide mood swap also
+activates a mood on any DOM wrapper via `data-mood="X"`. Use it when one
+person, one product, or one route deserves its own character without
+forking the page.
+
+```tsx
+// Next.js layout pattern — reaches navbar + page + footer
+export default async function ArzadonLayout({ children }) {
+  const pathname = await getCurrentPathname();
+  const mood = pathname === '/about/jennifer-arzadon'
+    ? 'jennifer-editorial'
+    : undefined;
+
+  return (
+    <div data-mood={mood}>
+      <Navbar />
+      <main>{children}</main>
+      <Footer />
+    </div>
+  );
+}
+```
+
+The mood JSON shape is identical to a site-wide mood but with a critical
+authoring discipline: **partial-token override**. Only override tokens you
+actually want different from the surrounding default. A 12-token per-page
+mood reads as *"why is this page on a different website?"* A 3- or 4-token
+mood reads as *a deliberate signal layer*.
+
+The smallest interesting per-page mood is usually accent + font:
+
+```json
+{
+  "id": "jennifer-editorial",
+  "name": "Jennifer Editorial",
+  "base": "luxurious-refined",
+  "tokens": {
+    "accent":      { "lightValue": "#B8860B", "darkValue": "#E8C566" },
+    "accent-warm": { "lightValue": "#B8860B", "darkValue": "#E8C566" },
+    "accent-fg":   { "lightValue": "#1A1612", "darkValue": "#1A1612" },
+    "font-display":{ "lightValue": "var(--font-dm-serif)", "darkValue": "var(--font-dm-serif)" }
+  },
+  "active-tokens":  ["accent", "accent-warm", "accent-fg", "font-display"],
+  "shelved-tokens": ["ink", "bg", "bg-card", "bg-elev", "border"]
+}
+```
+
+Along with the JSON, add the corresponding `[data-mood="X"]` block to
+`surface-extensions.css`. The mood is now activatable from any wrapper.
+
+**Activation strategies** (full doc:
+[`docs/architecture/per-page-moods.md`](./docs/architecture/per-page-moods.md)):
+- **Route layout** — reaches navbar + page + footer (most common)
+- **Page component** — page-only, chrome stays branded
+- **Per-section** — single feature card demonstrates a mood; rest of page stays default
+
+**Brand-locked tokens still cannot be overridden** in per-page mode. Per-page
+logo variants ship as **asset swaps** (different SVG when the path matches),
+not as token overrides.
+
+Template: [`src/moods/per-page-example.json`](./src/moods/per-page-example.json).
+
+---
+
 ## Annotating surfaces
 
 Every element with a dark background (or any non-default surface) needs an
@@ -271,6 +349,17 @@ tincture contrast
 
 **Mood delta rejected:**
 - Token has `"locked": true`. Locked tokens cannot be mood-overridden by design.
+
+**Per-page mood applied but page looks like a different website:**
+- The mood is overriding too many tokens. Check `--bg`, `--ink`, `--bg-card`
+  — those are the foundation of the page's visual identity. Per-page moods
+  should usually leave them alone and only shift accent + font + maybe
+  border. See partial-token discipline in the per-page moods doc.
+
+**Per-page mood activates but footer doesn't pick it up:**
+- The footer is being rendered OUTSIDE the wrapper that has `data-mood="X"`.
+  Move the attribute up to a wrapper that includes both the page and the
+  footer (typically the layout root).
 
 **Next.js: `--font-display` not applying:**
 - Missing font bridge. See Step 5 above — Next/font vars don't reach `:root`.

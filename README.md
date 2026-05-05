@@ -347,7 +347,8 @@ tincture-css/
 │   │   ├── editorial-warm.json
 │   │   ├── luxurious-refined.json
 │   │   ├── aggressive-bold.json
-│   │   └── minimalist-quiet.json
+│   │   ├── minimalist-quiet.json
+│   │   └── per-page-example.json # Template for per-page moods (sparse override)
 │   └── registry.v02-example.json # Reference registry (all token kinds)
 ├── tests/
 │   ├── test-schema.mjs           # 39 schema tests
@@ -358,7 +359,11 @@ tincture-css/
 │   ├── MOODS.md
 │   ├── QUICKSTART.md
 │   └── architecture/
-│       └── why-not-automatic.md
+│       ├── why-not-automatic.md
+│       ├── light-variants.md           # Mist / Whisper / Slate Ghost light palettes
+│       ├── theme-surface-pattern.md    # Server/client gap + ThemeSurface wrapper
+│       ├── surface-extensions-pattern.md # The mood-bridge indirection layer
+│       └── per-page-moods.md           # data-mood="X" on any wrapper, runtime cascade
 ├── tools/
 │   └── vscode-tincture/          # VS Code extension (token hover + autocomplete)
 ├── tincture.config.example.json  # Consumer config template

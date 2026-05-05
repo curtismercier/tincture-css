@@ -106,3 +106,15 @@ const cssVar = MOOD_PASSTHROUGH.has(tokenId)
 | `_generated/flavors.css` | Codegen | Flavor overrides |
 | `surface-extensions.css` | Hand-maintained | Mood bridge + new surfaces |
 | `globals.css` | Hand-maintained | Import order + project tokens |
+
+## See also
+
+The `--mood-*` indirection layer documented here is what powers
+**per-page moods** — moods activated via a `data-mood="X"` attribute on
+any DOM wrapper rather than via a site-wide CLI swap. The same fallback
+pattern (`var(--mood-X, default)`) lets any descendant subtree pick up a
+different mood without touching the registry.
+
+→ [`per-page-moods.md`](./per-page-moods.md) for the activation pattern,
+authoring discipline, and live production example (Arzadon Fitness's
+`jennifer-editorial`).
