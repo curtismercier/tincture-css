@@ -1,6 +1,6 @@
 # Per-Page Moods
 
-**Status:** Stable pattern, in production at [Arzadon Fitness](../../consumers/arzadon-fitness.md) since 2026-05-04.
+**Status:** Stable pattern, in production at a fitness-studio consumer since 2026-05-04.
 
 A mood doesn't have to live at the root. The same `--mood-*` indirection
 layer that powers site-wide mood swaps will also activate a mood on **any
@@ -67,7 +67,7 @@ site-wide mood:
 {
   "id": "jennifer-editorial",
   "name": "Jennifer Editorial",
-  "doc": "Per-page mood for /about/jennifer-arzadon. Champagne accents + DM Serif.",
+  "doc": "Per-page mood for /about/<co-founder>. Champagne accents + editorial serif.",
   "base": "luxurious-refined",
 
   // 1. KEEP THIS LIST SMALL. Only override tokens you actually want
@@ -132,9 +132,10 @@ A 12-token mood reads as **"why is this page on a different website?"**
 twice. Those are the page's foundation. Override accent + font; let the
 foundation hold.
 
-(Arzadon learned this the iterative way — see
-[`consumers/arzadon-fitness.md`](../../consumers/arzadon-fitness.md) for
-the iteration log on `jennifer-editorial` arriving at the 4-token shape.)
+(The fitness-studio consumer arrived at the 4-token shape iteratively;
+the first cut over-reached into `--bg` and `--ink` and made the navbar
+feel like a different site. Pulling back to accent + font only restored
+continuity while keeping the per-page character.)
 
 ## Activation strategies
 
@@ -198,8 +199,7 @@ demonstrate a mood while the rest of the page stays in the default.
 ```
 
 This is how a "showcase the mood" card on a tour/demo page can demonstrate
-itself live — see [`consumers/arzadon-fitness.md`](../../consumers/arzadon-fitness.md)
-for the example.
+itself live within a surrounding page that stays on the site default.
 
 ## When to use which mode
 
@@ -237,4 +237,4 @@ for the example.
 - [`docs/MOODS.md`](../MOODS.md) — site-wide moods, mood diff/preview/apply CLI
 - [`docs/architecture/surface-extensions-pattern.md`](./surface-extensions-pattern.md) — the indirection layer that makes both modes work
 - [`src/moods/per-page-example.json`](../../src/moods/per-page-example.json) — minimal per-page mood template (4 tokens, partial override)
-- [`consumers/arzadon-fitness.md`](../../consumers/arzadon-fitness.md) — first production consumer of per-page mood (`jennifer-editorial`)
+

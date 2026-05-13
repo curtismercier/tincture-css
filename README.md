@@ -5,7 +5,7 @@
 A surface-aware, multi-axis design substrate for AI-mediated theming. One mood delta shifts an entire visual identity — typography, color, spacing, shadows, radius — coordinated across every surface simultaneously.
 
 **Version:** 0.2.2 · **Status:** Active  
-**Origin:** Built for [Arzadon Fitness](https://arzadonfitness.com)'s new site — coming soon. Extracted as a standalone substrate.
+**Origin:** Extracted from production work on a fitness-studio client site.
 
 ---
 
@@ -143,7 +143,7 @@ identity, with the mood as a deliberate signal layer.
 
 [→ docs/architecture/per-page-moods.md](./docs/architecture/per-page-moods.md)
 · [→ src/moods/per-page-example.json](./src/moods/per-page-example.json)
-· First production consumer: [Arzadon Fitness](./consumers/arzadon-fitness.md) (`/about/jennifer-arzadon`)
+· First production consumer: a fitness-studio site shipped `jennifer-editorial` on a per-page `/about/<co-founder>` route.
 
 ---
 
@@ -302,6 +302,22 @@ tincture contrast                      WCAG contrast audit
 
 ---
 
+## Coming soon
+
+**`tincture codegen --watch`** — re-emit on registry save. No manual re-run during active token iteration.
+
+**Astro support** — `.astro` file scanning in `tincture scan` and the surface linter. Currently covers `.tsx`/`.ts`. Astro is the second consumer framework (soma.gravicity.ai is being migrated now).
+
+**`tincture audit`** — single pre-deploy gate: `validate` + `scan` + `contrast` + surface lint in one command with unified output and a single exit code for CI.
+
+**`tincture mood scaffold <name>`** — auto-generates the `[data-mood="X"]` CSS block from a mood JSON delta so you don't have to hand-write `surface-extensions.css` entries.
+
+**`tincture tokens diff`** — compare `registry.json` vs the last-emitted `manifest.json` to surface "edited but not regenerated" drift before deploy.
+
+**Named profiles** — first-class `tincture profile create <name>` for independent sub-themes (e.g. an admin dashboard that shares token names but carries a distinct palette, without leaking into the public site's cascade). Currently hand-rolled via wrapper attributes.
+
+---
+
 ## Why not X?
 
 **Style Dictionary** (Amazon) — excellent for storing tokens and transforming to platforms (iOS, Android, CSS). Doesn't model surface-awareness, mood composition, or multi-axis tokens.
@@ -375,9 +391,9 @@ tincture-css/
 
 ## Origin
 
-Tincture crystallised in April 2026 while building the new [Arzadon Fitness](https://arzadonfitness.com) site — a Toronto personal training studio. After 30 commits of theme work, a single question about a secondary accent colour made the real problem clear: the *substrate* didn't model what we actually cared about. Surface-aware ink. Moods that coordinate. Tokens that know their axes.
+Tincture crystallised in April 2026 during production work on a fitness-studio client site. After 30 commits of theme work, a single question about a secondary accent colour made the real problem clear: the *substrate* didn't model what we actually cared about. Surface-aware ink. Moods that coordinate. Tokens that know their axes.
 
-Every mood, surface annotation, and token in this repo runs in that build. The new site is coming soon.
+Every mood, surface annotation, and token in this repo runs in that build.
 
 The name comes from the tincture process: a drop of concentrated extract changes the entire pour. One mood delta, one coordinated shift.
 

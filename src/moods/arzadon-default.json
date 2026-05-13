@@ -1,8 +1,0 @@
-{
-  "id": "arzadon-default",
-  "name": "Arzadon Default",
-  "doc": "Current Arzadon palette: deep crimson on light surface, vivid red-orange on dark. Cool slate / cream parchment base. The baseline mood — every other mood is a delta from this.",
-  "base": null,
-  "tokens": {},
-  "axis-defaults": { "surface": "light", "flavor": "warm" }
-}

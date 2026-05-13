@@ -76,7 +76,7 @@ strategies, common pitfalls): [`docs/architecture/per-page-moods.md`](./architec
 
 Template: [`src/moods/per-page-example.json`](../src/moods/per-page-example.json).
 
-First production consumer: Arzadon Fitness's `jennifer-editorial` on
-`/about/jennifer-arzadon` — swaps brand red for champagne gold + Oswald for
-DM Serif Display, cascading through navbar, page, and footer simultaneously.
-See [`consumers/arzadon-fitness.md`](../consumers/arzadon-fitness.md).
+Example: a fitness-studio consumer ships a `jennifer-editorial` mood on
+`/about/<co-founder>` — swaps brand red for champagne gold and the
+display typeface for an editorial serif, cascading through navbar, page,
+and footer simultaneously.

@@ -24,8 +24,17 @@ src/_generated-v2/
 dist/
 *.tgz
 
+# ── Soma observation log ─────────────────────────────────────────────────
+log.md
+
 # ── OS / editor ───────────────────────────────────────────────────────────
 .DS_Store
 .env
 .env.local
 *.log
+
+# Cycle work-in-progress (planning notes, not for ship)
+REVAMP-WIP.md
+README.draft*.md
+*.mjs.draft
+*.md.draft

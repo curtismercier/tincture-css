@@ -1,166 +1,261 @@
 #!/usr/bin/env node
 /**
- * tincture-contrast.mjs — cycle 10.
+ * contrast.mjs — WCAG 2.1 + APCA contrast matrix for a Tincture registry.
  *
- * Walks the manifest's contrastPair declarations and computes WCAG 2.1
- * relative-luminance ratios in BOTH surface contexts (light + dark).
+ * For every foreground × background token pair declared in registry.json,
+ * resolves the colors per surface (light, dark, custom), composites
+ * translucent backgrounds over the page bg, and computes:
+ *   - WCAG 2.1 contrast ratio (the legal/compliance standard)
+ *   - APCA |Lc| (the W3 draft perceptual standard, used by axe-core 4.7+)
  *
- * Thresholds:
- *   - text-* roles      → 4.5:1 (WCAG AA normal text)
- *   - text-* on accent  → 4.5:1 (same)
- *   - accent / ui roles → 3:1   (WCAG AA UI components)
+ * Output: markdown matrix (default), JSON (--json), or fail-only (--check).
  *
- * Exit 0 if all pass. Exit 1 with diagnostic on any fail.
- * Marginal pairs (3.0-4.5 for text) print to stderr as warnings (non-blocking).
+ * Usage:
+ *   tincture contrast                         # current registry, all surfaces
+ *   tincture contrast --surface light         # one surface only
+ *   tincture contrast --check                 # exit 1 if any pair fails
+ *   tincture contrast --json                  # machine-readable
+ *   tincture contrast --registry path/to.json # custom path
  *
- * Pre-push integration: studio/scripts/git-hooks/pre-push runs this.
- * Skip with SKIP_TINCTURE_CONTRAST=1.
+ * Verdict per cell:
+ *   ✅ both pass     — WCAG ≥ 4.5 AND APCA |Lc| ≥ 75
+ *   🟡 one passes    — heading/large-text safe but not body
+ *   🔴 both fail     — WCAG < 3.0 OR APCA |Lc| < 45
+ *
+ * Why two algorithms?
+ *   WCAG 2.1 is luminance-ratio based. It's the legal standard. It also
+ *   misses real readability problems with mid-tone colors, and over-flags
+ *   light-on-dark inversions.
+ *
+ *   APCA is perceptual + polarity-aware. It's the W3 draft for WCAG 3 and
+ *   the algorithm axe-core 4.7+ runs internally. When the two disagree,
+ *   APCA is usually closer to "can a person actually read this."
+ *
+ *   Tincture reports both. Disagreement is the signal.
  */
 
 import { readFileSync, existsSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { dirname, resolve } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-import { MANIFEST_PATH as MANIFEST } from './_resolve-config.mjs';
 
-const jsonOut = process.argv.includes('--json');
-const verbose = process.argv.includes('--verbose');
+// ─── Args ────────────────────────────────────────────────────────────────
+const args = process.argv.slice(2);
+const has = (f) => args.includes(`--${f}`);
+const arg = (f, fallback) => {
+  const i = args.findIndex(a => a === `--${f}` || a.startsWith(`--${f}=`));
+  if (i < 0) return fallback;
+  if (args[i].includes('=')) return args[i].split('=')[1];
+  return args[i + 1] ?? fallback;
+};
 
-if (!existsSync(MANIFEST)) {
-  console.error('x manifest.json missing — run `tincture codegen` first');
-  process.exit(3);
+const registryPath = arg('registry', resolve(process.cwd(), 'tincture/registry.json')) ||
+                     resolve(process.cwd(), 'src/styles/tincture/registry.json');
+const surfaceFilter = arg('surface', null);
+
+if (!existsSync(registryPath)) {
+  console.error(`registry not found: ${registryPath}`);
+  console.error(`hint: pass --registry <path> or run from project root`);
+  process.exit(2);
 }
 
-const m = JSON.parse(readFileSync(MANIFEST, 'utf8'));
+const registry = JSON.parse(readFileSync(registryPath, 'utf8'));
 
-// ── WCAG 2.1 relative luminance ────────────────────────────────────────
-function parseColor(value) {
-  // Hex
-  let s = String(value).trim();
-  if (s.startsWith('#')) {
-    s = s.slice(1);
-    if (s.length === 3) s = s.split('').map((c) => c + c).join('');
-    return {
-      r: parseInt(s.slice(0, 2), 16),
-      g: parseInt(s.slice(2, 4), 16),
-      b: parseInt(s.slice(4, 6), 16),
-      a: 1,
-    };
-  }
-  // rgba()
-  const m = s.match(/rgba?\(([^)]+)\)/);
+// ─── Color parsing ───────────────────────────────────────────────────────
+function parseColor(s) {
+  s = (s || '').toString().trim();
+  let m = s.match(/^#([0-9a-fA-F]{3,8})$/);
   if (m) {
-    const parts = m[1].split(',').map((p) => parseFloat(p.trim()));
-    return { r: parts[0] | 0, g: parts[1] | 0, b: parts[2] | 0, a: parts[3] ?? 1 };
+    const h = m[1];
+    if (h.length === 3) return [parseInt(h[0]+h[0],16), parseInt(h[1]+h[1],16), parseInt(h[2]+h[2],16), 1];
+    if (h.length === 6) return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16), 1];
+    if (h.length === 8) return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16), parseInt(h.slice(6,8),16)/255];
   }
+  m = s.match(/^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)(?:\s*,\s*([\d.]+))?\s*\)$/);
+  if (m) return [+m[1], +m[2], +m[3], m[4] !== undefined ? +m[4] : 1];
   return null;
 }
 
-function relativeLuminance({ r, g, b }) {
-  const linear = (v) => {
-    const c = v / 255;
-    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+// ─── Composite over base ─────────────────────────────────────────────────
+function compositeOver(top, base) {
+  const a = top[3] ?? 1;
+  return [
+    Math.round(top[0]*a + base[0]*(1-a)),
+    Math.round(top[1]*a + base[1]*(1-a)),
+    Math.round(top[2]*a + base[2]*(1-a)),
+    1,
+  ];
+}
+
+// ─── WCAG 2.1 ────────────────────────────────────────────────────────────
+function relLuminance([r, g, b]) {
+  const ch = c => { c /= 255; return c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); };
+  return 0.2126*ch(r) + 0.7152*ch(g) + 0.0722*ch(b);
+}
+function contrastRatio(c1, c2) {
+  const L1 = relLuminance(c1), L2 = relLuminance(c2);
+  const [hi, lo] = L1 > L2 ? [L1, L2] : [L2, L1];
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+// ─── APCA Lc (Myndex/apca-w3 algorithm, MIT) ─────────────────────────────
+function sRGBtoY([r, g, b]) {
+  const ch = c => Math.pow(c/255, 2.4);
+  return 0.2126729*ch(r) + 0.7151522*ch(g) + 0.0721750*ch(b);
+}
+function apcaContrast(txt, bg) {
+  const SA = {
+    blkThrs: 0.022, blkClmp: 1.414,
+    scaleBoW: 1.14, normBG: 0.56, normTXT: 0.57,
+    revTXT: 0.62, revBG: 0.65, scaleWoB: 1.14,
+    loBoWoffset: 0.027, loWoBoffset: 0.027,
+    deltaYmin: 0.0005, loClip: 0.1,
   };
-  return 0.2126 * linear(r) + 0.7152 * linear(g) + 0.0722 * linear(b);
-}
-
-function contrast(fg, bg) {
-  const l1 = relativeLuminance(fg);
-  const l2 = relativeLuminance(bg);
-  return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
-}
-
-// ── Walk contrast pairs ────────────────────────────────────────────────
-const pairs = [];
-for (const [id, t] of Object.entries(m.tokens)) {
-  if (!t.contrastPair) continue;
-  const pair = m.tokens[t.contrastPair];
-  if (!pair) continue;
-  pairs.push({ fgId: t.contrastPair, bgId: id, role: t.role });
-}
-
-// Add implicit pairs: every text-* on every surface
-const surfacePairs = [
-  // ink on bg in both surfaces
-  { fgId: 'ink', bgId: 'bg', role: 'text-primary' },
-  { fgId: 'ink-soft', bgId: 'bg', role: 'text-secondary' },
-  { fgId: 'ink-muted', bgId: 'bg', role: 'text-tertiary' },
-  // ink on bg-card
-  { fgId: 'ink', bgId: 'bg-card', role: 'text-primary' },
-  { fgId: 'ink-soft', bgId: 'bg-card', role: 'text-secondary' },
-];
-for (const p of surfacePairs) {
-  if (!pairs.some((x) => x.fgId === p.fgId && x.bgId === p.bgId)) {
-    pairs.push(p);
+  let txtY = sRGBtoY(txt), bgY = sRGBtoY(bg);
+  txtY = (txtY > SA.blkThrs) ? txtY : txtY + Math.pow(SA.blkThrs - txtY, SA.blkClmp);
+  bgY  = (bgY  > SA.blkThrs) ? bgY  : bgY  + Math.pow(SA.blkThrs - bgY,  SA.blkClmp);
+  if (Math.abs(bgY - txtY) < SA.deltaYmin) return 0.0;
+  let SAPC, out;
+  if (bgY > txtY) {
+    SAPC = (Math.pow(bgY, SA.normBG) - Math.pow(txtY, SA.normTXT)) * SA.scaleBoW;
+    out = SAPC < SA.loClip ? 0 : SAPC - SA.loBoWoffset;
+  } else {
+    SAPC = (Math.pow(bgY, SA.revBG) - Math.pow(txtY, SA.revTXT)) * SA.scaleWoB;
+    out = SAPC > -SA.loClip ? 0 : SAPC + SA.loWoBoffset;
   }
+  return out * 100;
 }
 
-const results = [];
-for (const p of pairs) {
-  const fg = m.tokens[p.fgId];
-  const bg = m.tokens[p.bgId];
-  if (!fg || !bg) continue;
-  for (const surface of ['light', 'dark']) {
-    const fgVal = surface === 'light' ? fg.lightValue : fg.darkValue;
-    const bgVal = surface === 'light' ? bg.lightValue : bg.darkValue;
-    const fgC = parseColor(fgVal);
-    const bgC = parseColor(bgVal);
-    if (!fgC || !bgC) continue;
-    // For rgba with alpha < 1 we'd composite over a default — skip those
-    if (fgC.a < 1 || bgC.a < 1) continue;
-    const ratio = contrast(fgC, bgC);
-    const isText = (p.role ?? '').startsWith('text');
-    const threshold = isText ? 4.5 : 3.0;
-    const status = ratio >= threshold ? 'pass' : ratio >= 3.0 ? 'marginal' : 'fail';
-    results.push({
-      fg: p.fgId, bg: p.bgId, surface, ratio: Number(ratio.toFixed(2)),
-      threshold, status, fgValue: fgVal, bgValue: bgVal, role: p.role,
-    });
+// ─── Resolve all token values per surface ────────────────────────────────
+function resolveForSurface(registry, surface) {
+  const out = new Map();
+  for (const [name, tok] of Object.entries(registry.tokens || {})) {
+    if (tok.kind && tok.kind !== 'color') continue;
+    const values = tok.values || {};
+    const key = `surface=${surface}`;
+    const raw = values[key] || values.default;
+    if (!raw) continue;
+    const c = parseColor(raw);
+    if (c) out.set(name, c);
   }
+  return out;
 }
 
-// ── Report ─────────────────────────────────────────────────────────────
-if (jsonOut) {
-  console.log(JSON.stringify(results, null, 2));
-} else {
-  console.log('tincture-contrast — cycle 10');
-  console.log('');
-  console.log('  ' + ['fg', 'bg', 'surface', 'ratio', 'threshold', 'status', 'role']
-    .map((h, i) => h.padEnd([16, 16, 8, 8, 10, 10, 18][i])).join(''));
-  console.log('  ' + '─'.repeat(86));
-  for (const r of results) {
-    const widths = [16, 16, 8, 8, 10, 10, 18];
-    const cells = [
-      r.fg.padEnd(widths[0]),
-      r.bg.padEnd(widths[1]),
-      r.surface.padEnd(widths[2]),
-      r.ratio.toFixed(2).padEnd(widths[3]),
-      `≥${r.threshold}`.padEnd(widths[4]),
-      r.status.padEnd(widths[5]),
-      (r.role ?? '').padEnd(widths[6]),
-    ];
-    const marker = r.status === 'fail' ? '✗' : r.status === 'marginal' ? '~' : '✓';
-    console.log(`  ${marker} ${cells.join('')}`);
-  }
-}
-
-const fails = results.filter((r) => r.status === 'fail');
-const marginals = results.filter((r) => r.status === 'marginal');
-
-if (!jsonOut) {
-  console.log('');
-  console.log(`  ${results.length} pair(s) checked.`);
-  console.log(`  ${fails.length} fail(s) · ${marginals.length} marginal · ${results.length - fails.length - marginals.length} pass.`);
-}
-
-if (fails.length > 0) {
-  if (!jsonOut) {
-    console.error('');
-    console.error(`x ${fails.length} contrast failure(s) below WCAG threshold:`);
-    for (const f of fails) {
-      console.error(`  --${f.fg} on --${f.bg} (${f.surface}): ${f.ratio}:1 < ${f.threshold}:1`);
+// ─── Detect surface variants present in the registry ─────────────────────
+function detectSurfaces(registry) {
+  const set = new Set(['default']);
+  for (const tok of Object.values(registry.tokens || {})) {
+    for (const k of Object.keys(tok.values || {})) {
+      const m = k.match(/^surface=(.+)$/);
+      if (m) set.add(m[1]);
     }
   }
-  process.exit(1);
+  // 'default' implies whichever surface was tuned for it; we expose it as 'dark'
+  // by convention (default = dark surface) — adjust if your project differs.
+  return [...set].filter(s => s !== 'default');
 }
+
+// ─── Heuristics for fg vs bg token roles ─────────────────────────────────
+function isLikelyFg(name) {
+  return /^--?(?:ink|text|fg|color|promo(?:-text|-dim)?|accent|warm|moon|sun-text|brand)/.test(name) ||
+         /-text$|-fg$/.test(name);
+}
+function isLikelyBg(name) {
+  return /^--?(?:bg|background|surface|panel|card|elev|shadow)/.test(name) ||
+         /-bg$|-card$|-elev$/.test(name);
+}
+
+// ─── Verdict per pair ────────────────────────────────────────────────────
+function verdict(wcag, apca) {
+  const apcaAbs = Math.abs(apca);
+  const wcagPass = wcag >= 4.5;
+  const apcaPass = apcaAbs >= 75;
+  if (wcagPass && apcaPass) return '✅';
+  if (wcag < 3 || apcaAbs < 45) return '🔴';
+  return '🟡';
+}
+
+// ─── Format matrix ───────────────────────────────────────────────────────
+function buildMatrix(registry, surface, baseBgRgba) {
+  const resolved = resolveForSurface(registry, surface);
+  const fgNames = [...resolved.keys()].filter(isLikelyFg).map(n => n.startsWith('--') ? n : `--${n}`);
+  const bgNames = [...resolved.keys()].filter(isLikelyBg).map(n => n.startsWith('--') ? n : `--${n}`);
+  const rows = [];
+  for (const fg of fgNames) {
+    const fgRaw = resolved.get(fg.replace(/^--/, '')) || resolved.get(fg);
+    if (!fgRaw) continue;
+    const cells = [];
+    for (const bg of bgNames) {
+      const bgRaw = resolved.get(bg.replace(/^--/, '')) || resolved.get(bg);
+      if (!bgRaw) { cells.push({ bg, wcag: null, apca: null, verdict: '_-_' }); continue; }
+      const bgEff = compositeOver(bgRaw, baseBgRgba);
+      const wcag = contrastRatio(fgRaw.slice(0,3), bgEff.slice(0,3));
+      const apca = apcaContrast(fgRaw.slice(0,3), bgEff.slice(0,3));
+      cells.push({ bg, wcag, apca, verdict: verdict(wcag, apca) });
+    }
+    rows.push({ fg, cells });
+  }
+  return { surface, fgNames, bgNames, rows };
+}
+
+// ─── Render markdown ─────────────────────────────────────────────────────
+function fmtMatrix(matrix) {
+  const out = [];
+  out.push(`## Surface: \`${matrix.surface}\`\n`);
+  if (!matrix.rows.length) {
+    out.push('_No fg × bg pairs detected. Check token naming heuristics._\n');
+    return out.join('\n');
+  }
+  out.push(`| FG \\ BG | ${matrix.bgNames.map(n => `\`${n}\``).join(' | ')} |`);
+  out.push(`|${'---|'.repeat(matrix.bgNames.length + 1)}`);
+  for (const row of matrix.rows) {
+    const cells = row.cells.map(c => {
+      if (c.wcag === null) return c.verdict;
+      return `${c.wcag.toFixed(1)} / Lc${Math.abs(c.apca).toFixed(0)} ${c.verdict}`;
+    });
+    out.push(`| \`${row.fg}\` | ${cells.join(' | ')} |`);
+  }
+  return out.join('\n');
+}
+
+// ─── Main ────────────────────────────────────────────────────────────────
+function main() {
+  const surfaces = surfaceFilter ? [surfaceFilter] : detectSurfaces(registry);
+  if (!surfaces.length) {
+    console.error('no surfaces detected in registry. did you set "axes": ["surface"] on your color tokens?');
+    process.exit(2);
+  }
+
+  const matrices = surfaces.map(s => {
+    // Default base bg per surface — used for translucent compositing
+    const base = s === 'light' ? [232, 238, 245, 1] : [12, 15, 22, 1];
+    return buildMatrix(registry, s, base);
+  });
+
+  if (has('json')) {
+    console.log(JSON.stringify({ surfaces: matrices.map(m => ({
+      surface: m.surface,
+      fgNames: m.fgNames,
+      bgNames: m.bgNames,
+      rows: m.rows,
+    })) }, null, 2));
+    return;
+  }
+
+  if (has('check')) {
+    let failed = 0;
+    for (const m of matrices) for (const row of m.rows) for (const cell of row.cells)
+      if (cell.verdict === '🔴') failed++;
+    console.error(`contrast: ${failed} pair(s) failed both WCAG and APCA thresholds`);
+    process.exit(failed > 0 ? 1 : 0);
+  }
+
+  // Markdown report
+  console.log(`# Contrast — ${registry.name || 'tincture registry'}\n`);
+  console.log(`Format per cell: \`WCAG / Lc<APCA> verdict\`. ✅ both pass · 🟡 one passes (heading/large only) · 🔴 both fail.\n`);
+  console.log(`WCAG 2.1 thresholds: 4.5:1 body / 3:1 large.  APCA: |Lc| ≥ 75 body / 60 heading / 45 large.\n`);
+  for (const m of matrices) console.log(fmtMatrix(m) + '\n');
+}
+
+main();

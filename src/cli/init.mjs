@@ -27,8 +27,6 @@
  *   node scripts/tincture-foundation.mjs            # apply
  *   node scripts/tincture-foundation.mjs --dry      # report only
  *   node scripts/tincture-foundation.mjs --check    # exit 1 if changes pending
- *
- * See: .soma/plans/tincture-2026-04-30/PLAN.md
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';

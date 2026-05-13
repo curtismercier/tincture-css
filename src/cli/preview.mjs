@@ -127,11 +127,10 @@ for (const [name, url] of Object.entries(urls)) {
 
 await browser.disconnect();
 console.log('');
-console.log('Mosaic via .soma/tools/screenshot-mosaic.py:');
-console.log(`  python3 .soma/tools/screenshot-mosaic.py \\`);
+console.log('Captured. Compose into a 2x2 mosaic via your tool of choice, e.g.:');
 for (const k of ['light-current', 'light-proposed', 'dark-current', 'dark-proposed']) {
-  console.log(`    "${captures[k]}" \\`);
+  console.log(`  ${k}: ${captures[k]}`);
 }
-console.log(`    --output ${CACHE}/${tokenId}-mosaic-${sha}.jpg --grid 2x2`);
+console.log(`  output target: ${CACHE}/${tokenId}-mosaic-${sha}.jpg`);
 console.log('');
 console.log(`  Then read the mosaic to see the 2x2 visual diff.`);

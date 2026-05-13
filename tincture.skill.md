@@ -231,9 +231,9 @@ forking the page.
 
 ```tsx
 // Next.js layout pattern — reaches navbar + page + footer
-export default async function ArzadonLayout({ children }) {
+export default async function TenantLayout({ children }) {
   const pathname = await getCurrentPathname();
-  const mood = pathname === '/about/jennifer-arzadon'
+  const mood = pathname === '/about/<co-founder>'
     ? 'jennifer-editorial'
     : undefined;
 
@@ -387,6 +387,6 @@ Never edit these directly — they are overwritten by `tincture codegen`.
 
 - **Repo:** `curtismercier/tincture-css`
 - **README:** full comparison vs Style Dictionary, Radix Colors, Panda CSS, shadcn/ui, Tailwind v4
-- **Proving ground:** Arzadon Fitness (Next.js 15 + Tailwind v4 — site coming soon at arzadonfitness.com)
+- **Proving ground:** a fitness-studio consumer (Next.js 15 + Tailwind v4)
 - **Config discovery:** `_resolve-config.mjs` reads `tincture.config.json` walking up from CWD
 - **Schema:** `src/schema.mjs` — plain JS, no runtime dependencies
